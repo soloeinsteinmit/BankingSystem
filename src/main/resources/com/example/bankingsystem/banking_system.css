@@ -1,0 +1,34 @@
+.sign_in_textField {
+    -fx-text-fill : white;
+}
+
+.bg_color {
+    -fx-background-color: linear-gradient(from 100.0% 0.0% to 0.0% 100.0%, #003399ff 0.0%, #2a2146ff 100.0%);
+}
+
+.bg_color_btn {
+    -fx-background-color: linear-gradient(from 100.0% 0.0% to 0.0% 100.0%, #003399ff 0.0%, #2a2146ff 100.0%);
+}
+.bg_color_btn:hover {
+    -fx-background-color: linear-gradient(from 0.0% 100.0% to 100.0% 0.0%, #003399ff 0.0%, #2a2146ff 100.0%);
+}
+
+.btn_sign_out {
+    -fx-background-radius: 30;
+    -fx-border-color: white;
+    -fx-border-radius: 30;
+    -fx-background-color: #5530BE;
+}
+.btn_sign_out:hover {
+    -fx-background-radius: 30;
+    -fx-border-color: white;
+    -fx-border-radius: 30;
+    -fx-background-color: #16214021;
+}
+
+.forget_password {
+    -fx-text-fill : white;
+}
+.forget_password:hover {
+    -fx-text-fill : #6F7788;
+}
