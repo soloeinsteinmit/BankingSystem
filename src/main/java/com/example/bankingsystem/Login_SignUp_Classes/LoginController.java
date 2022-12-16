@@ -58,15 +58,29 @@ public class LoginController implements Initializable {
     private Label show_signUp;
     @FXML
     private MFXButton signUp_btn_signIn;
+
+    public static Pane getSignUp_signIn_pane() {
+        return signUp_signIn_pane;
+    }
+
     @FXML
-    private Pane signUp_signIn_pane;
+    private static Pane signUp_signIn_pane;
     @FXML
     private MFXButton sign_btn_signUp;
 
     @FXML
-    private Pane translateSignInPane;
+    private static Pane translateSignInPane;
+
+    public static Pane getTranslateSignInPane() {
+        return translateSignInPane;
+    }
+
+    public static Pane getTranslateSignUpPane() {
+        return translateSignUpPane;
+    }
+
     @FXML
-    private Pane translateSignUpPane;
+    private static Pane translateSignUpPane;
     @FXML
     private Label signUp_label;
     @FXML
@@ -84,10 +98,12 @@ public class LoginController implements Initializable {
     private Scene scene;
 
 
+
+
+
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
-
 
         TranslateTransition translateTransition = new TranslateTransition(Duration.seconds(1), signUp_signIn_pane);
         translateTransition.setToX(0);
@@ -222,7 +238,7 @@ public class LoginController implements Initializable {
         });
     }
 
-    public void translateSignUpPane(){
+    public static void translateSignUpPane(){
         TranslateTransition transition = new TranslateTransition(Duration.seconds(0.5), translateSignUpPane);
         transition.setByX(100);
         transition.play();

@@ -260,45 +260,7 @@
                   </MFXButton>
                </children>
             </Pane>
-            <Pane fx:id="signUp_signIn_pane" layoutX="449.0" prefHeight="538.0" prefWidth="271.0" style="-fx-background-color: #5530be; -fx-background-radius: 10 10 10 10;" styleClass="bg_color" stylesheets="@../banking_system.css">
-               <children>
-                  <Circle fill="#16214021" layoutX="34.0" layoutY="361.0" radius="13.0" stroke="TRANSPARENT" strokeType="INSIDE">
-                     <effect>
-                        <GaussianBlur radius="1.85" />
-                     </effect>
-                  </Circle>
-                  <Text fill="WHITE" layoutX="28.0" layoutY="222.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Hello, Friend!" textAlignment="CENTER" wrappingWidth="215.4375">
-                     <font>
-                        <Font name="Leelawadee UI Bold" size="34.0" />
-                     </font>
-                  </Text>
-                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#16214021" height="26.0" layoutX="246.0" layoutY="297.0" rotate="33.7" stroke="TRANSPARENT" strokeType="INSIDE" width="23.0" />
-                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#16214021" height="20.0" layoutX="17.0" layoutY="203.0" rotate="38.7" stroke="TRANSPARENT" strokeType="INSIDE" width="34.0" />
-                  <Polygon fill="#16214021" layoutX="153.0" layoutY="506.0" points="-50.0, 40.0, 50.0, 40.0, 0.0, -60.0" rotate="160.0" stroke="TRANSPARENT" strokeType="INSIDE">
-                     <effect>
-                        <Glow />
-                     </effect>
-                  </Polygon>
-                  <Polygon fill="#16214021" layoutX="193.0" layoutY="83.0" points="-90.0, 38.0, 147.0, 58.0, 48.0, -178.0" stroke="TRANSPARENT" strokeType="INSIDE" visible="false" />
-                  <Text fill="WHITE" layoutX="42.0" layoutY="269.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Enter your peronal details and start a journey with us" textAlignment="CENTER" wrappingWidth="186.94775390625">
-                     <font>
-                        <Font name="Segoe UI Semibold" size="14.0" />
-                     </font>
-                  </Text>
-                  <MFXButton alignment="CENTER" depthLevel="LEVEL0" disable="true" layoutX="56.0" layoutY="322.0" prefHeight="52.0" prefWidth="158.0" rippleAnimateShadow="true" rippleColor="#bdbdbd12" styleClass="btn_sign_out" stylesheets="@../banking_system.css" text="SIGN UP" textFill="WHITE">
-                     <font>
-                        <Font name="Segoe UI Semibold" size="15.0" />
-                     </font>
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor>
-                  </MFXButton>
-                  <ImageView fitHeight="134.0" fitWidth="187.0" layoutX="84.0" layoutY="1.0" pickOnBounds="true">
-                     <image>
-                        <Image url="@Frame.png" />
-                     </image>
-                  </ImageView>
-               </children></Pane>
+            <VBox fx:id="vBox" layoutX="449.0" prefHeight="538.0" prefWidth="271.0" style="-fx-background-color: white;" />
             <Text fx:id="ibank_signUp" fill="#5530be" layoutX="59.0" layoutY="42.0" strokeType="OUTSIDE" strokeWidth="0.0" text="iBankAccount">
                <font>
                   <Font name="Segoe UI Semibold" size="12.0" />
