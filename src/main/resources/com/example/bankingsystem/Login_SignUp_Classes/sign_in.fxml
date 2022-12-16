@@ -27,7 +27,7 @@
             <Font name="Segoe UI Semibold" size="14.0" />
          </font>
       </Text>
-      <MFXButton alignment="CENTER" depthLevel="LEVEL0" layoutX="56.0" layoutY="322.0" prefHeight="52.0" prefWidth="158.0" rippleAnimateShadow="true" rippleColor="#bdbdbd12" styleClass="btn_sign_out" stylesheets="@../banking_system.css" text="SIGN IN" textFill="WHITE">
+      <MFXButton alignment="CENTER" depthLevel="LEVEL0" disable="true" layoutX="56.0" layoutY="322.0" prefHeight="52.0" prefWidth="158.0" rippleAnimateShadow="true" rippleColor="#bdbdbd12" styleClass="btn_sign_out" stylesheets="@../banking_system.css" text="SIGN IN" textFill="WHITE">
          <font>
             <Font name="Segoe UI Semibold" size="15.0" />
          </font>
@@ -35,15 +35,11 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </MFXButton>
-      <Polygon fill="#16214021" layoutX="279.0" layoutY="264.0" points="-50.0, 40.0, 50.0, 40.0, 0.0, -60.0" rotate="-116.6" stroke="TRANSPARENT" strokeType="INSIDE">
+      <Polygon fill="#16214021" layoutX="287.0" layoutY="252.0" points="-38.43052673339844, 35.67347717285156, -12.740395545959473, 25.336151123046875, -17.222169876098633, -11.47000503540039" rotate="3.0" stroke="TRANSPARENT" strokeType="INSIDE">
          <effect>
             <Glow />
          </effect>
       </Polygon>
-      <CubicCurve controlX1="-55.0" controlX2="204.0" controlY1="-256.0" controlY2="-158.0" endX="91.0" endY="72.0" fill="#16214021" layoutX="47.0" layoutY="553.0" startX="-181.0" startY="-75.0" stroke="TRANSPARENT" />
-      <CubicCurve controlX1="20.0" controlX2="115.0" controlY1="92.0" controlY2="-75.0" endX="61.0" endY="-43.0" fill="#ae858a" layoutX="85.0" layoutY="587.0" startX="61.0" startY="52.0" stroke="TRANSPARENT" />
-      <Rectangle arcHeight="5.0" fill="#ae858a" height="200.0" layoutX="-85.0" layoutY="410.0" stroke="#78363600" strokeType="INSIDE" width="85.0" />
-      <CubicCurve controlX1="4.0" controlX2="-44.0" controlY1="87.0" controlY2="-26.0" endX="81.0" endY="-43.0" fill="#ae858a" layoutX="-80.0" layoutY="431.0" startX="75.0" startY="49.0" stroke="TRANSPARENT" />
       <Text fill="WHITE" layoutX="59.0" layoutY="42.0" strokeType="OUTSIDE" strokeWidth="0.0" text="iBankAccount">
          <font>
             <Font name="Segoe UI Semibold" size="12.0" />
@@ -54,6 +50,10 @@
             <Image url="@logo_white.png" />
          </image>
       </ImageView>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ae858a" height="16.0" layoutX="137.0" layoutY="538.0" stroke="TRANSPARENT" strokeType="INSIDE" width="26.0" />
+      <ImageView fitHeight="150.0" fitWidth="165.0" layoutY="387.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@shape_circle.png" />
+         </image>
+      </ImageView>
    </children>
 </Pane>

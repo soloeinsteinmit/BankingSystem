@@ -27,14 +27,12 @@
             <Glow />
          </effect>
       </Polygon>
-      <Polygon fill="#16214021" layoutX="193.0" layoutY="83.0" points="-88.0, 40.0, 122.0, 55.0, 44.0, -164.0" stroke="TRANSPARENT" strokeType="INSIDE" />
-      <Polygon fill="#b3dd71" layoutX="243.0" layoutY="-40.0" points="-57.0, 40.0, 50.0, 40.0, 0.0, -60.0" stroke="TRANSPARENT" strokeType="INSIDE" />
       <Text fill="WHITE" layoutX="42.0" layoutY="269.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Enter your peronal details and start a journey with us" textAlignment="CENTER" wrappingWidth="186.94775390625">
          <font>
             <Font name="Segoe UI Semibold" size="14.0" />
          </font>
       </Text>
-      <MFXButton alignment="CENTER" depthLevel="LEVEL0" layoutX="56.0" layoutY="322.0" prefHeight="52.0" prefWidth="158.0" rippleAnimateShadow="true" rippleColor="#bdbdbd12" styleClass="btn_sign_out" stylesheets="@../banking_system.css" text="SIGN UP" textFill="WHITE">
+      <MFXButton alignment="CENTER" depthLevel="LEVEL0" disable="true" layoutX="56.0" layoutY="322.0" onMouseClicked="#open_sign_up" prefHeight="52.0" prefWidth="158.0" rippleAnimateShadow="true" rippleColor="#bdbdbd12" styleClass="btn_sign_out" stylesheets="@../banking_system.css" text="SIGN UP" textFill="WHITE">
          <font>
             <Font name="Segoe UI Semibold" size="15.0" />
          </font>
@@ -42,21 +40,10 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </MFXButton>
-      <ImageView fitHeight="26.0" fitWidth="26.0" layoutX="227.0" layoutY="16.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="134.0" fitWidth="187.0" layoutX="84.0" layoutY="1.0" pickOnBounds="true">
          <image>
-            <Image url="@Close_blue.png" />
+            <Image url="@Frame.png" />
          </image>
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor>
-      </ImageView>
-      <ImageView fitHeight="26.0" fitWidth="26.0" layoutX="227.0" layoutY="16.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@Close.png" />
-         </image>
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor>
       </ImageView>
    </children>
 </Pane>

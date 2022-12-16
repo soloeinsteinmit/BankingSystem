@@ -13,4 +13,6 @@ module com.example.bankingsystem {
     exports com.example.bankingsystem;
     exports com.example.bankingsystem.Login_SignUp_Classes;
     opens com.example.bankingsystem.Login_SignUp_Classes to javafx.fxml;
+    exports com.example.bankingsystem.MainDashboardClasses;
+    opens com.example.bankingsystem.MainDashboardClasses to javafx.fxml;
 }

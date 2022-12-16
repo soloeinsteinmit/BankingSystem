@@ -26,6 +26,17 @@
     -fx-background-color: #16214021;
 }
 
+.gen_acc_id{
+    -fx-background-color: #0E172A;
+    -fx-font-size: 11;
+    -fx-font-weight: normal;
+}
+.gen_acc_id:hover{
+    -fx-background-color: #1D3058;
+    -fx-font-size: 10.5;
+    -fx-font-weight: normal;
+}
+
 .forget_password {
     -fx-text-fill : white;
 }
