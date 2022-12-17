@@ -19,6 +19,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
 import javafx.scene.text.Text;
@@ -58,6 +59,9 @@ public class LoginController implements Initializable {
     private Label show_signUp;
     @FXML
     private MFXButton signUp_btn_signIn;
+    @FXML
+    private VBox vBox;
+
 
     public static Pane getSignUp_signIn_pane() {
         return signUp_signIn_pane;
@@ -91,8 +95,15 @@ public class LoginController implements Initializable {
     private TextField account_id_textField_signIn;
     @FXML
     private Circle moving_ball;
+    @FXML
+    private VBox createAccount_vBox;
 
-    private Parent fxml;
+    public static VBox container;
+    public static VBox panel;
+
+    private static Parent fxml;
+
+
     private Parent root;
     private Stage stage;
     private Scene scene;
@@ -101,9 +112,11 @@ public class LoginController implements Initializable {
 
 
 
-
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        createAccount();
+        container = createAccount_vBox;
+        panel = vBox;
 
         TranslateTransition translateTransition = new TranslateTransition(Duration.seconds(1), signUp_signIn_pane);
         translateTransition.setToX(0);
@@ -128,9 +141,10 @@ public class LoginController implements Initializable {
 
 
             try {
-                fxml = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("sign_up.fxml")));
-                signUp_signIn_pane.getChildren().removeAll();
-                signUp_signIn_pane.getChildren().setAll(fxml);
+                fxml = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("createAccount.fxml")));
+                createAccount_vBox.setVisible(false);
+                createAccount_vBox.getChildren().removeAll();
+                createAccount_vBox.getChildren().add(fxml);
 
 //                if (translateSignUpPane.isVisible()){
 //                    signIn_label.setDisable(true);
@@ -139,7 +153,8 @@ public class LoginController implements Initializable {
 //                if (translateSignInPane.isVisible()){
 //                    signUp_label.setDisable(false);
 //                    signIn_label.setDisable(true);
-//                }
+//
+
 
                 generate_accId_btn.setOnAction(event1 -> {
                     Random acc_id = new Random();
@@ -183,9 +198,9 @@ public class LoginController implements Initializable {
 
     }
 
-    @FXML
-    public void open_sign_in(MouseEvent event){
-        TranslateTransition translateTransition = new TranslateTransition(Duration.seconds(1), signUp_signIn_pane);
+
+    public static void open_sign_in(){
+ /*       TranslateTransition translateTransition = new TranslateTransition(Duration.seconds(1), signUp_signIn_pane);
         translateTransition.setToX(0);
         translateTransition.play();
         translateSignInPane();
@@ -197,22 +212,31 @@ public class LoginController implements Initializable {
             fadeTransition1.setInterpolator(Interpolator.EASE_IN);
             fadeTransition1.setFromValue(0);
             fadeTransition1.setToValue(1);
-            fadeTransition1.play();
+            fadeTransition1.play();*/
 
-            try {
-                fxml = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("sign_up.fxml")));
-                signUp_signIn_pane.getChildren().removeAll();
-                signUp_signIn_pane.getChildren().setAll(fxml);
-            } catch (IOException exception){
-                System.out.println("Error found in removing or setting fxml sign up");
-                System.out.println(exception.getCause().toString());
-            }
-        });
+        try {
+            fxml = FXMLLoader.load(Objects.requireNonNull(LoginController.class.getResource("createAccount.fxml")));
+
+            container.getChildren().removeAll();
+            container.getChildren().setAll(fxml);
+            container.setLayoutX(269);
+
+            fxml = FXMLLoader.load(Objects.requireNonNull(
+                    LoginController.class.getResource("sign_in.fxml")));
+            panel.getChildren().removeAll();
+            panel.setLayoutX(-2);
+            panel.getChildren().setAll(fxml);
+
+        } catch (IOException exception){
+            System.out.println("Error found in removing or setting fxml sign in");
+            System.out.println(exception);
+        }
+
+        //});
     }
 
-    @FXML
-    public void open_sign_up(MouseEvent event){
-        TranslateTransition translateTransition = new TranslateTransition(Duration.seconds(1), signUp_signIn_pane);
+    public static void open_sign_up(){
+      /*  TranslateTransition translateTransition = new TranslateTransition(Duration.seconds(1), signUp_signIn_pane);
         translateTransition.setToX(-signUp_signIn_pane.getLayoutX());
         translateTransition.play();
 
@@ -225,17 +249,24 @@ public class LoginController implements Initializable {
             fadeTransition1.setInterpolator(Interpolator.EASE_IN);
             fadeTransition1.setFromValue(0);
             fadeTransition1.setToValue(1);
-            fadeTransition1.play();
+            fadeTransition1.play();*/
 
             try {
-                fxml = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("sign_in.fxml")));
-                signUp_signIn_pane.getChildren().removeAll();
-                signUp_signIn_pane.getChildren().setAll(fxml);
+                panel.setLayoutX(444);
+                container.setLayoutX(9);
+                fxml = FXMLLoader.load(Objects.requireNonNull(LoginController.class.getResource("signin_iBank.fxml")));
+                container.getChildren().removeAll();
+                container.getChildren().setAll(fxml);
+                fxml = FXMLLoader.load(Objects.requireNonNull(
+                        LoginController.class.getResource("sign_up.fxml")));
+                panel.getChildren().removeAll();
+                panel.getChildren().setAll(fxml);
+
             } catch (IOException exception){
                 System.out.println("Error found in removing or setting fxml sign in");
-                System.out.println(exception.getCause().toString());
+                System.out.println(exception);
             }
-        });
+
     }
 
     public static void translateSignUpPane(){
@@ -280,6 +311,30 @@ public class LoginController implements Initializable {
             transition1.setByX(100);
             transition1.play();
         });
+
+    }
+
+    /**
+     * Loads the create account fxml and sign in fxml to their respective
+     * vBoxes.
+     * */
+    private void createAccount(){
+
+        try {
+            fxml = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("createAccount.fxml")));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        createAccount_vBox.getChildren().setAll(fxml);
+
+        try {
+            fxml = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("sign_in.fxml")));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        vBox.setLayoutX(-2);
+        vBox.getChildren().add(fxml);
+
 
     }
 
