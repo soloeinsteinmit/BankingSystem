@@ -10,7 +10,7 @@
 <?import javafx.scene.shape.*?>
 <?import javafx.scene.text.*?>
 
-<Pane fx:id="translateSignUpPane" prefHeight="447.0" prefWidth="443.0" style="-fx-background-color: #0E172A;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
+<Pane fx:id="translateSignUpPane" prefHeight="447.0" prefWidth="443.0" style="-fx-background-color: #0E172A;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.bankingsystem.Login_SignUp_Classes.SignInIBankAccountTextController">
    <children>
       <Circle fx:id="moving_ball" fill="#1f93ff5d" layoutX="161.0" layoutY="44.0" radius="26.0" stroke="TRANSPARENT" strokeType="INSIDE">
          <effect>
