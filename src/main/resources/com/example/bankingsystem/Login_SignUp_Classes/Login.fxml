@@ -1,17 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Point3D?>
-<?import javafx.scene.Cursor?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.Pane?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.shape.Circle?>
-<?import javafx.scene.shape.Polygon?>
-<?import javafx.scene.shape.Rectangle?>
-<?import javafx.scene.text.Font?>
-<?import javafx.scene.text.Text?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="645.0" prefWidth="830.0" style="-fx-background-color: #14213D;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.bankingsystem.Login_SignUp_Classes.LoginController">
    <children>
@@ -27,15 +21,14 @@
       </ImageView>
       <AnchorPane layoutX="59.0" layoutY="54.0" prefHeight="538.0" prefWidth="713.0" style="-fx-background-color: #0E172A; -fx-background-radius: 10;">
          <children>
-            <VBox fx:id="signIn_vBox" layoutX="4.0" layoutY="60.0" prefHeight="447.0" prefWidth="443.0" style="-fx-background-color: red;" visible="false" />
-            <VBox fx:id="createAccount_vBox" layoutX="269.0" layoutY="39.0" prefHeight="462.0" prefWidth="433.0" style="-fx-background-color: blue;" />
-            <VBox fx:id="vBox" layoutX="444.0" layoutY="-1.0" prefHeight="538.0" prefWidth="271.0" style="-fx-background-color: white;" />
+            <VBox fx:id="signIn_vBox" layoutY="60.0" prefHeight="447.0" prefWidth="443.0" style="-fx-background-color: #0E172A;" />
+            <VBox fx:id="createAccount_vBox" layoutX="269.0" layoutY="39.0" prefHeight="462.0" prefWidth="433.0" style="-fx-background-color: blue;" visible="false" />
+            <VBox fx:id="vBox" layoutX="442.0" prefHeight="538.0" prefWidth="271.0" style="-fx-background-color: white; -fx-background-radius: 10 10 10 10;" />
             <Text fx:id="ibank_signUp" fill="#5530be" layoutX="59.0" layoutY="42.0" strokeType="OUTSIDE" strokeWidth="0.0" text="iBankAccount">
                <font>
                   <Font name="Segoe UI Semibold" size="12.0" />
                </font>
             </Text>
-            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#0e172a" height="200.0" layoutX="269.0" layoutY="170.0" stroke="TRANSPARENT" strokeType="INSIDE" visible="false" width="107.0" />
             <ImageView fx:id="logo_signUp" fitHeight="45.0" fitWidth="51.0" layoutX="14.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@logo_blue.png" />

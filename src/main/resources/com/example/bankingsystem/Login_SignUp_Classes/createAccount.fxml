@@ -1,20 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import io.github.palexdev.materialfx.controls.MFXButton?>
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.Cursor?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.PasswordField?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.Pane?>
-<?import javafx.scene.text.Font?>
-<?import javafx.scene.text.Text?>
+<?import io.github.palexdev.materialfx.controls.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
 <Pane fx:id="translateSignInPane" prefHeight="462.0" prefWidth="433.0" style="-fx-background-color: #0E172A;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.bankingsystem.Login_SignUp_Classes.CreateAccountController">
    <children>
-      <Text fx:id="create_acc_text_signIn" fill="#5530be" layoutX="44.0" layoutY="69.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Create Account" textAlignment="CENTER" wrappingWidth="344.4375">
+      <Text fill="#5530be" layoutX="44.0" layoutY="69.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Create Account" textAlignment="CENTER" wrappingWidth="344.4375">
          <font>
             <Font name="Leelawadee UI Bold" size="32.0" />
          </font>
@@ -38,7 +34,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </MFXButton>
-      <ImageView fx:id="name_img_signIn" fitHeight="18.0" fitWidth="26.0" layoutX="63.0" layoutY="175.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="18.0" fitWidth="26.0" layoutX="63.0" layoutY="175.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@name.png" />
          </image>
@@ -54,7 +50,7 @@
             <Insets left="30.0" />
          </padding>
       </TextField>
-      <ImageView fx:id="email_img_signIn" fitHeight="20.0" fitWidth="18.0" layoutX="63.0" layoutY="233.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="20.0" fitWidth="18.0" layoutX="63.0" layoutY="233.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@email.png" />
          </image>
@@ -75,12 +71,12 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Label>
-      <ImageView fx:id="password_img_signIn" fitHeight="20.0" fitWidth="18.0" layoutX="63.0" layoutY="291.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="20.0" fitWidth="18.0" layoutX="63.0" layoutY="291.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@password.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="f_img_signIn" fitHeight="37.0" fitWidth="45.0" layoutX="130.0" layoutY="85.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="37.0" fitWidth="45.0" layoutX="130.0" layoutY="85.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@facebook_circled_new.png" />
          </image>
@@ -88,7 +84,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </ImageView>
-      <ImageView fx:id="g_img_signIn" fitHeight="37.0" fitWidth="45.0" layoutX="191.0" layoutY="85.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="37.0" fitWidth="45.0" layoutX="191.0" layoutY="85.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@google_plus_new.png" />
          </image>
@@ -96,7 +92,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </ImageView>
-      <ImageView fx:id="in_img_signIn" fitHeight="37.0" fitWidth="45.0" layoutX="251.0" layoutY="85.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="37.0" fitWidth="45.0" layoutX="251.0" layoutY="85.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@linkedin_circled.png" />
          </image>
@@ -104,12 +100,12 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </ImageView>
-      <Text fx:id="text_or_signIn" fill="#6f7788" layoutX="103.0" layoutY="147.0" strokeType="OUTSIDE" strokeWidth="0.0" text="or use your email for registration:" textAlignment="CENTER" wrappingWidth="226.94775390625">
+      <Text fill="#6f7788" layoutX="103.0" layoutY="147.0" strokeType="OUTSIDE" strokeWidth="0.0" text="or use your email for registration:" textAlignment="CENTER" wrappingWidth="226.94775390625">
          <font>
             <Font name="Segoe UI Semibold" size="12.0" />
          </font>
       </Text>
-      <TextField fx:id="account_id_textField_signIn" layoutX="59.0" layoutY="332.0" prefHeight="45.0" prefWidth="170.0" promptText="ACCOUNT ID" style="-fx-background-color: #172242; -fx-background-radius: 2; -fx-border-radius: 2; -fx-border-color: #172242;" styleClass="sign_in_textField" stylesheets="@../banking_system.css">
+      <TextField fx:id="account_id_textField_signIn" editable="false" layoutX="59.0" layoutY="332.0" prefHeight="45.0" prefWidth="170.0" promptText="ACCOUNT ID" style="-fx-background-color: #172242; -fx-background-radius: 2; -fx-border-radius: 2; -fx-border-color: #172242;" styleClass="sign_in_textField" stylesheets="@../banking_system.css">
          <font>
             <Font name="Segoe UI Semibold" size="13.0" />
          </font>
@@ -120,7 +116,7 @@
             <Insets left="30.0" />
          </padding>
       </TextField>
-      <ImageView fx:id="email_img_signIn1" fitHeight="20.0" fitWidth="18.0" layoutX="63.0" layoutY="346.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="20.0" fitWidth="18.0" layoutX="63.0" layoutY="346.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@id.png" />
          </image>

@@ -3,17 +3,18 @@ package com.example.bankingsystem.DatabaseConnectionUtils;
 import javafx.scene.control.Alert;
 
 import java.sql.*;
-import java.util.Date;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class DatabaseConnection {
 
-    public static void signUpUser(String userFullName,String email, String user_password, String user_account_id){
+
+    public static void signUpUser(String userFullName, String email, String user_password,
+                                  String user_account_id){
         Connection connection = null;
         PreparedStatement psInsert = null;
         PreparedStatement psCheckUserExist = null;
         ResultSet resultSet = null;
-
 
 
         try{
@@ -43,6 +44,7 @@ public class DatabaseConnection {
                 psInsert.setString(4, dateFormat.format(date));
                 psInsert.setString(5, user_account_id);
                 psInsert.executeUpdate();
+
             }
         }
         catch (SQLException e){
