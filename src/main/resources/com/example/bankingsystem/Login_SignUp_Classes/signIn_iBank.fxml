@@ -42,7 +42,7 @@
          </cursor>
       </Label>
       <Line endX="67.0" layoutX="222.0" layoutY="341.0" startX="-70.0" stroke="#e5e1e11e" strokeWidth="0.5" />
-      <MFXButton fx:id="sign_btn_signUp" alignment="CENTER" layoutX="142.0" layoutY="361.0" prefHeight="52.0" prefWidth="158.0" rippleAnimateShadow="true" rippleColor="#bdbdbd12" style="-fx-background-radius: 30;" styleClass="bg_color_btn" stylesheets="@../banking_system.css" text="SIGN IN" textFill="WHITE">
+      <MFXButton fx:id="sign_btn" alignment="CENTER" layoutX="142.0" layoutY="361.0" prefHeight="52.0" prefWidth="158.0" rippleAnimateShadow="true" rippleColor="#bdbdbd12" style="-fx-background-radius: 30;" styleClass="bg_color_btn" stylesheets="@../banking_system.css" text="SIGN IN" textFill="WHITE">
          <font>
             <Font name="Segoe UI Bold" size="15.0" />
          </font>
@@ -50,7 +50,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </MFXButton>
-      <ImageView fx:id="email_img_signUp" fitHeight="18.0" fitWidth="26.0" layoutX="69.0" layoutY="160.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="email_img_signUp" fitHeight="18.0" fitWidth="26.0" layoutX="72.0" layoutY="160.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@email.png" />
          </image>

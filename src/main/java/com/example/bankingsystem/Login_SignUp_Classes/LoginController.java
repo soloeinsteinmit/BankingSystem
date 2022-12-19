@@ -8,7 +8,9 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Text;
 import javafx.util.Duration;
 
 import java.io.IOException;
@@ -32,9 +34,16 @@ public class LoginController implements Initializable {
     @FXML
     private VBox signIn_vBox;
 
+    @FXML
+    private ImageView logo_signUp;
+    @FXML
+    private Text ibank_signUp;
+
     public static VBox container;
     public static VBox container_iBank;
     public static VBox panel;
+    public static Text iBankText;
+    public static ImageView logo_img;
 
     private static Parent fxml;
 
@@ -42,47 +51,26 @@ public class LoginController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         logInAccount();
+
+        iBankText = ibank_signUp;
+        logo_img = logo_signUp;
         container = createAccount_vBox;
         container_iBank = signIn_vBox;
         panel = vBox;
-
-        /*TranslateTransition translateTransition1 = new TranslateTransition(Duration.seconds(8), moving_ball);
-        translateTransition1.setToX(translateSignUpPane.getWidth());
-        translateTransition1.setToY(translateSignUpPane.getHeight());
-        translateTransition1.setCycleCount(2);
-        translateTransition1.setAutoReverse(true);
-        translateTransition1.play();
-        translateTransition1.setOnFinished(event -> {
-            TranslateTransition translateTransition2 = new TranslateTransition(Duration.seconds(8), moving_ball);
-            translateTransition2.setToX(translateSignInPane.getWidth());
-            translateTransition2.setToY(-translateSignInPane.getHeight());
-            translateTransition2.setCycleCount(TranslateTransition.INDEFINITE);
-            translateTransition2.setAutoReverse(true);
-            translateTransition2.play();
-        });*/
-
-        try {
-            fxml = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("createAccount.fxml")));
-            createAccount_vBox.setVisible(false);
-            createAccount_vBox.getChildren().removeAll();
-            createAccount_vBox.getChildren().add(fxml);
-
-        } catch (IOException exception){
-            System.out.println("Error found in removing or setting fxml");
-            System.out.println(exception.getCause().toString());
-        }
 
     }
 
 
     public static void open_sign_in(){
 
-
         try {
             fxml = FXMLLoader.load(Objects.requireNonNull(LoginController.class.getResource("createAccount.fxml")));
+
+
             TranslateTransition translateTransition = new TranslateTransition(Duration.seconds(1), panel);
             translateTransition.setToX(-panel.getLayoutX());
             translateTransition.play();
+            fadeOutLogoAndText();
             translateSignInPane();
             translateTransition.setOnFinished(e -> {
 
@@ -90,37 +78,36 @@ public class LoginController implements Initializable {
                 fadeTransition1.setNode(container_iBank);
                 fadeTransition1.setDuration(Duration.seconds(1));
                 fadeTransition1.setInterpolator(Interpolator.EASE_IN);
-                fadeTransition1.setFromValue(0);
-                fadeTransition1.setToValue(1);
+                fadeTransition1.setFromValue(1);
+                fadeTransition1.setToValue(0);
                 fadeTransition1.play();
             });
+
             container.getChildren().removeAll();
             container.getChildren().setAll(fxml);
 
             fxml = FXMLLoader.load(Objects.requireNonNull(
                     LoginController.class.getResource("sign_in.fxml")));
+
             panel.getChildren().removeAll();
             panel.getChildren().setAll(fxml);
-
-
-
 
         } catch (IOException exception){
             System.out.println("Error found in removing or setting fxml sign in");
             exception.printStackTrace();
         }
-
-        //});
     }
 
     public static void open_sign_up(){
 
             try {
                 fxml = FXMLLoader.load(Objects.requireNonNull(LoginController.class.getResource("signin_iBank.fxml")));
+
+
                 TranslateTransition translateTransition = new TranslateTransition(Duration.seconds(1), panel);
                 translateTransition.setToX(0);
                 translateTransition.play();
-
+                fadeInLogoAndText();
                 translateSignUpPane();
                 translateTransition.setOnFinished(e -> {
 
@@ -135,8 +122,10 @@ public class LoginController implements Initializable {
 
                 container.getChildren().removeAll();
                 container.getChildren().setAll(fxml);
+
                 fxml = FXMLLoader.load(Objects.requireNonNull(
                         LoginController.class.getResource("sign_up.fxml")));
+
                 panel.getChildren().removeAll();
                 panel.getChildren().setAll(fxml);
 
@@ -149,21 +138,22 @@ public class LoginController implements Initializable {
 
     public static void translateSignUpPane(){
         TranslateTransition transition = new TranslateTransition(Duration.seconds(0.5), container);
-        transition.setByX(100);
+        transition.setByX(-100);
         transition.play();
         transition.setOnFinished(event -> {
             FadeTransition fadeTransition = new FadeTransition();
-            fadeTransition.setNode(container);
+            fadeTransition.setNode(container_iBank);
             fadeTransition.setDuration(Duration.seconds(1));
-            fadeTransition.setInterpolator(Interpolator.LINEAR);
-            fadeTransition.setFromValue(1);
-            fadeTransition.setToValue(0);
+            fadeTransition.setInterpolator(Interpolator.EASE_IN);
+            fadeTransition.setFromValue(0);
+            fadeTransition.setToValue(1);
             fadeTransition.play();
+
             container.setVisible(false);
             container_iBank.setVisible(true);
 
             TranslateTransition transition1 = new TranslateTransition(Duration.seconds(0.5), container);
-            transition1.setByX(-100);
+            transition1.setByX(100);
             transition1.play();
 
 
@@ -176,43 +166,20 @@ public class LoginController implements Initializable {
         transition.play();
         transition.setOnFinished(event -> {
             FadeTransition fadeTransition = new FadeTransition();
-            fadeTransition.setNode(container_iBank);
+            fadeTransition.setNode(container);
             fadeTransition.setDuration(Duration.seconds(1));
             fadeTransition.setInterpolator(Interpolator.LINEAR);
-            fadeTransition.setFromValue(1);
-            fadeTransition.setToValue(0);
+            fadeTransition.setFromValue(0);
+            fadeTransition.setToValue(1);
             fadeTransition.play();
 
-            container_iBank.setVisible(false);
             container.setVisible(true);
+            container_iBank.setVisible(false);
 
             TranslateTransition transition1 = new TranslateTransition(Duration.seconds(0.5), container_iBank);
             transition1.setByX(-100);
             transition1.play();
         });
-
-    }
-
-    /**
-     * Loads the create account fxml and sign in fxml to their respective
-     * vBoxes.
-     * */
-    private void createAccount(){
-
-        try {
-            fxml = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("createAccount.fxml")));
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-        createAccount_vBox.getChildren().setAll(fxml);
-
-        try {
-            fxml = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("sign_in.fxml")));
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-        vBox.setLayoutX(-2);
-        vBox.getChildren().add(fxml);
 
     }
 
@@ -230,6 +197,42 @@ public class LoginController implements Initializable {
             throw new RuntimeException(e);
         }
         vBox.getChildren().add(fxml);
+    }
+
+    private static void fadeOutLogoAndText(){
+        FadeTransition fadeTransition = new FadeTransition();
+        fadeTransition.setNode(iBankText);
+        fadeTransition.setDuration(Duration.seconds(1));
+        fadeTransition.setInterpolator(Interpolator.EASE_OUT);
+        fadeTransition.setFromValue(1);
+        fadeTransition.setToValue(0);
+        fadeTransition.play();
+
+        FadeTransition fadeTransition1 = new FadeTransition();
+        fadeTransition1.setNode(logo_img);
+        fadeTransition1.setDuration(Duration.seconds(1));
+        fadeTransition1.setInterpolator(Interpolator.EASE_OUT);
+        fadeTransition1.setFromValue(1);
+        fadeTransition1.setToValue(0);
+        fadeTransition1.play();
+    }
+
+    private static void fadeInLogoAndText(){
+        FadeTransition fadeTransition = new FadeTransition();
+        fadeTransition.setNode(logo_img);
+        fadeTransition.setDuration(Duration.seconds(1));
+        fadeTransition.setInterpolator(Interpolator.EASE_IN);
+        fadeTransition.setFromValue(0);
+        fadeTransition.setToValue(1);
+        fadeTransition.play();
+
+        FadeTransition fadeTransition1 = new FadeTransition();
+        fadeTransition1.setNode(iBankText);
+        fadeTransition1.setDuration(Duration.seconds(1));
+        fadeTransition1.setInterpolator(Interpolator.EASE_IN);
+        fadeTransition1.setFromValue(0);
+        fadeTransition1.setToValue(1);
+        fadeTransition1.play();
     }
 
 

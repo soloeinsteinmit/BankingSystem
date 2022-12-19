@@ -34,7 +34,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </MFXButton>
-      <ImageView fitHeight="18.0" fitWidth="26.0" layoutX="63.0" layoutY="175.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="18.0" fitWidth="26.0" layoutX="66.0" layoutY="175.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@name.png" />
          </image>
@@ -50,7 +50,7 @@
             <Insets left="30.0" />
          </padding>
       </TextField>
-      <ImageView fitHeight="20.0" fitWidth="18.0" layoutX="63.0" layoutY="233.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="20.0" fitWidth="18.0" layoutX="66.0" layoutY="233.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@email.png" />
          </image>
@@ -71,7 +71,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Label>
-      <ImageView fitHeight="20.0" fitWidth="18.0" layoutX="63.0" layoutY="291.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="20.0" fitWidth="18.0" layoutX="66.0" layoutY="291.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@password.png" />
          </image>
@@ -116,7 +116,7 @@
             <Insets left="30.0" />
          </padding>
       </TextField>
-      <ImageView fitHeight="20.0" fitWidth="18.0" layoutX="63.0" layoutY="346.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="20.0" fitWidth="18.0" layoutX="66.0" layoutY="346.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@id.png" />
          </image>
