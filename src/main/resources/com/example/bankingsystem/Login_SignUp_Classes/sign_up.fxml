@@ -40,7 +40,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </MFXButton>
-      <ImageView fitHeight="134.0" fitWidth="187.0" layoutX="83.0" layoutY="1.0" pickOnBounds="true">
+      <ImageView fitHeight="137.0" fitWidth="154.0" layoutX="117.0" pickOnBounds="true">
          <image>
             <Image url="@Frame.png" />
          </image>

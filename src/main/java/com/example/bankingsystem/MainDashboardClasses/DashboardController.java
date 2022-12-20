@@ -1,14 +1,25 @@
 package com.example.bankingsystem.MainDashboardClasses;
 
+import com.example.bankingsystem.Login_SignUp_Classes.LoginController;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.image.ImageView;
+import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.net.URL;
+import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class DashboardController implements Initializable {
 
+    @FXML
+    private ImageView logoutBtn;
     @FXML
     private Label user_acc_id;
 
@@ -20,10 +31,27 @@ public class DashboardController implements Initializable {
 
     @FXML
     private Label user_password;
+    private static Parent root;
+    public static ImageView logOutImg;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        logOutImg = logoutBtn;
+        logout();
+    }
 
+    public static void logout(){
+        logOutImg.setOnMouseClicked(event -> {
+            try {
+                root = FXMLLoader.load(Objects.requireNonNull(LoginController.class.getResource("Login.fxml")));
+
+                Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+                stage.setScene(new Scene(root));
+                stage.show();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        });
     }
 
     public void setUserCredentials(String name, String email, String acc_id, String password){

@@ -56,11 +56,13 @@ public class SignInIBankAccountTextController implements Initializable {
     public static String userName;
     public static boolean isEqualController;
     public static MFXTextField getEmailText;
+    public static MFXButton signInBtn;
 
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         getEmailText = email_textField_signUp;
+        signInBtn = sign_btn;
         /*TranslateTransition translateTransition1 = new TranslateTransition(Duration.seconds(8), moving_ball);
         translateTransition1.setToX(translateSignUpPane.getWidth());
         translateTransition1.setToY(translateSignUpPane.getHeight());
@@ -84,7 +86,7 @@ public class SignInIBankAccountTextController implements Initializable {
     }
 
     private void signIn_User(){
-        sign_btn.setOnAction(event -> {
+        signInBtn.setOnAction(event -> {
             if ((email_textField_signUp.getText().isEmpty() || acc_id_textField_signUp.getText().isEmpty()
                     || password_textField_signUp.getText().isEmpty()) ){
                 Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -92,7 +94,7 @@ public class SignInIBankAccountTextController implements Initializable {
                 alert.show();
             } else{
                 try {
-                    FXMLLoader loader = new FXMLLoader(CreateAccountController.class.getResource("dashboard.fxml"));
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("dashboard.fxml"));
                     root = loader.load();
 
                     DashboardController getUserCredentials = loader.getController();
@@ -128,7 +130,7 @@ public class SignInIBankAccountTextController implements Initializable {
                 }
 
 
-                //DatabaseConnection.signInUser(event, "dashboard.fxml", email_textField_signUp.getText(),
+                //DatabaseConnection.signInUser(event, "dashboard1.fxml", email_textField_signUp.getText(),
                   //      acc_id_textField_signUp.getText(), password_textField_signUp.getText());
              }
         });

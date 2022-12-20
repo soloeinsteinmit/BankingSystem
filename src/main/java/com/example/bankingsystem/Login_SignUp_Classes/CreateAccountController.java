@@ -55,10 +55,12 @@ public class CreateAccountController implements Initializable {
     private Stage stage;
     private Scene scene;
     public static boolean isFound;
+    public static MFXButton signUpBtn;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
+        signUpBtn = signUp_btn_signIn;
         generateAccId();
         signUp_user();
 
@@ -81,7 +83,7 @@ public class CreateAccountController implements Initializable {
     * signs up user
     * */
     private void signUp_user(){
-        signUp_btn_signIn.setOnAction(event ->{
+        signUpBtn.setOnAction(event ->{
 
             if (account_id_textField_signIn.getText().equals("") || email_textField_signIn.getText().equals("")
                     || name_textField_signIn.getText().equals("")
@@ -93,7 +95,8 @@ public class CreateAccountController implements Initializable {
             else{
 
                 try {
-                    FXMLLoader loader = new FXMLLoader(CreateAccountController.class.getResource("dashboard.fxml"));
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("dashboard.fxml"));
+
                     root = loader.load();
                     DashboardController getUserCredentials = loader.getController();
 

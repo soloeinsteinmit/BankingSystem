@@ -233,7 +233,7 @@ public class LoginController implements Initializable {
             fadeTransition.setNode(container);
             fadeTransition.setDuration(Duration.seconds(1));
             fadeTransition.setInterpolator(Interpolator.LINEAR);
-            fadeTransition.setFromValue(0);
+            fadeTransition.setFromValue(0.4);
             fadeTransition.setToValue(1);
             fadeTransition.play();
 
