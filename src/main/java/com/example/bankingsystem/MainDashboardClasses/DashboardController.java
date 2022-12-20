@@ -1,6 +1,7 @@
 package com.example.bankingsystem.MainDashboardClasses;
 
 import com.example.bankingsystem.Login_SignUp_Classes.LoginController;
+import io.github.palexdev.materialfx.controls.MFXButton;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -8,7 +9,6 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
-import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -19,7 +19,7 @@ import java.util.ResourceBundle;
 public class DashboardController implements Initializable {
 
     @FXML
-    private ImageView logoutBtn;
+    private MFXButton logoutBtn;
     @FXML
     private Label user_acc_id;
 
@@ -32,7 +32,7 @@ public class DashboardController implements Initializable {
     @FXML
     private Label user_password;
     private static Parent root;
-    public static ImageView logOutImg;
+    public static MFXButton logOutImg;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {

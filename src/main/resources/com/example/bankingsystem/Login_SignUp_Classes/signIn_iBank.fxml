@@ -74,7 +74,7 @@
             <Font name="Segoe UI Semibold" size="11.0" />
          </font>
       </Text>
-      <MFXPasswordField fx:id="password_textField_signUp" allowCopy="true" allowCut="true" allowPaste="true" floatMode="DISABLED" floatingTextGap="0.0" layoutX="64.0" layoutY="262.0" minHeight="45.0" prefHeight="45.0" prefWidth="314.0" promptText="PASSWORD" style="-fx-background-color: #172242; -fx-border-color: #172242; -fx-background-radius: 2; -fx-border-radius: 2; -fx-text-fill: white; -fx-prompt-text-fill: #BCBCBC;" stylesheets="@../banking_system.css">
+      <MFXPasswordField fx:id="password_textField_signUp" allowCopy="true" allowCut="true" allowPaste="true" floatMode="DISABLED" floatingTextGap="0.0" layoutX="64.0" layoutY="262.0" minHeight="45.0" prefHeight="45.0" prefWidth="314.0" promptText="PASSWORD" style="-fx-background-color: #172242; -fx-border-color: #172242; -fx-background-radius: 2; -fx-border-radius: 2; -fx-text-fill: white; -fx-prompt-text-fill: #BCBCBC;" stylesheets="@../banking_system.css" text="man">
          <textFill>
             <Color red="1.0" green="1.0" blue="1.0" />
          </textFill>
@@ -93,7 +93,7 @@
             <Image url="@password.png" />
          </image>
       </ImageView>
-      <MFXTextField fx:id="email_textField_signUp" floatMode="DISABLED" layoutX="64.0" layoutY="145.0" minHeight="45.0" prefHeight="45.0" prefWidth="314.0" promptText="smithwills@gmail.com" stylesheets="@../banking_system.css">
+      <MFXTextField fx:id="email_textField_signUp" floatMode="DISABLED" layoutX="64.0" layoutY="145.0" minHeight="45.0" prefHeight="45.0" prefWidth="314.0" promptText="smithwills@gmail.com" stylesheets="@../banking_system.css" text="mac@gmail.com">
          <padding>
             <Insets left="30.0" />
          </padding>
@@ -109,7 +109,7 @@
             <Image url="@email.png" />
          </image>
       </ImageView>
-      <MFXTextField fx:id="acc_id_textField_signUp" floatMode="DISABLED" layoutX="63.0" layoutY="204.0" minHeight="45.0" prefHeight="45.0" prefWidth="314.0" promptText="ACCOUNT ID (EG: 12345)" stylesheets="@../banking_system.css">
+      <MFXTextField fx:id="acc_id_textField_signUp" floatMode="DISABLED" layoutX="63.0" layoutY="204.0" minHeight="45.0" prefHeight="45.0" prefWidth="314.0" promptText="ACCOUNT ID (EG: 12345)" stylesheets="@../banking_system.css" text="22501">
          <padding>
             <Insets left="30.0" />
          </padding>
