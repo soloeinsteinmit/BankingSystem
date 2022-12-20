@@ -3,6 +3,8 @@ package com.example.bankingsystem.Login_SignUp_Classes;
 import com.example.bankingsystem.DatabaseConnectionUtils.DatabaseConnection;
 import com.example.bankingsystem.MainDashboardClasses.DashboardController;
 import io.github.palexdev.materialfx.controls.MFXButton;
+import io.github.palexdev.materialfx.controls.MFXPasswordField;
+import io.github.palexdev.materialfx.controls.MFXTextField;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -10,11 +12,12 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
-import javafx.scene.control.Label;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import javafx.util.Duration;
+import tray.animations.AnimationType;
+import tray.notification.NotificationType;
+import tray.notification.TrayNotification;
 
 import java.io.IOException;
 import java.net.URL;
@@ -28,22 +31,19 @@ import java.util.ResourceBundle;
 public class CreateAccountController implements Initializable {
 
     @FXML
-    private TextField account_id_textField_signIn;
+    private MFXTextField account_id_textField_signIn;
 
     @FXML
-    private TextField email_textField_signIn;
+    private MFXTextField email_textField_signIn;
 
     @FXML
     private MFXButton generate_accId_btn;
 
     @FXML
-    private TextField name_textField_signIn;
+    private MFXTextField name_textField_signIn;
 
     @FXML
-    private PasswordField password_textField_signIn;
-
-    @FXML
-    private Label show_signIn;
+    private MFXPasswordField password_textField_signIn;
 
     @FXML
     private MFXButton signUp_btn_signIn;
@@ -54,6 +54,7 @@ public class CreateAccountController implements Initializable {
     private Parent root;
     private Stage stage;
     private Scene scene;
+    public static boolean isFound;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -88,32 +89,51 @@ public class CreateAccountController implements Initializable {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setContentText("Please fill in all the forms");
                 alert.show();
-            }else{
+            }
+            else{
 
                 try {
                     FXMLLoader loader = new FXMLLoader(CreateAccountController.class.getResource("dashboard.fxml"));
                     root = loader.load();
                     DashboardController getUserCredentials = loader.getController();
-                    getUserCredentials.setUserCredentials(name_textField_signIn.getText(),
+
+                    DatabaseConnection.signUpUser(name_textField_signIn.getText(),
                             email_textField_signIn.getText(), password_textField_signIn.getText(),
                             account_id_textField_signIn.getText());
+
+                    System.out.println("IS FOUND UP "+ isFound);
+
+                    if (SignInIBankAccountTextController.validateEmail(email_textField_signIn.getText()) && !isFound){
+
+
+                        getUserCredentials.setUserCredentials(name_textField_signIn.getText(),
+                                email_textField_signIn.getText(), password_textField_signIn.getText(),
+                                account_id_textField_signIn.getText());
+
+                        stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+                        scene = new Scene(root);
+                        stage.setScene(scene);
+                        stage.show();
+
+                        String title = "SIGNING UP";
+                        String message = name_textField_signIn.getText().toUpperCase() + " SUCCESSFUL SIGNED UP ";
+                        TrayNotification tray = new TrayNotification();
+                        AnimationType type = AnimationType.POPUP;
+
+                        tray.setAnimationType(type);
+                        tray.setTitle(title);
+                        tray.setMessage(message);
+                        tray.setNotificationType(NotificationType.SUCCESS);
+                        tray.showAndDismiss(Duration.millis(5000));
+                        System.out.println("Login successful");
+                    }
+
                 } catch (IOException ex) {
                     System.out.println(" error dashboard fxml");
                     throw new RuntimeException(ex);
                 }
 
-                stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
-                scene = new Scene(root);
-                stage.setScene(scene);
-                stage.show();
-
-                DatabaseConnection.signUpUser(name_textField_signIn.getText(),
-                        email_textField_signIn.getText(), password_textField_signIn.getText(),
-                        account_id_textField_signIn.getText());
-                System.out.println("Login successful");
             }
-
-
 
         });
     }

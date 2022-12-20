@@ -1,6 +1,12 @@
 package com.example.bankingsystem.Login_SignUp_Classes;
 
 
+import com.example.bankingsystem.DatabaseConnectionUtils.DatabaseConnection;
+import com.jfoenix.controls.JFXDialog;
+import com.jfoenix.controls.events.JFXDialogEvent;
+import io.github.palexdev.materialfx.controls.MFXButton;
+import io.github.palexdev.materialfx.controls.MFXPasswordField;
+import io.github.palexdev.materialfx.controls.MFXTextField;
 import javafx.animation.FadeTransition;
 import javafx.animation.Interpolator;
 import javafx.animation.TranslateTransition;
@@ -8,10 +14,17 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
+import javafx.scene.control.Alert;
+import javafx.scene.effect.BoxBlur;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.util.Duration;
+import tray.animations.AnimationType;
+import tray.notification.NotificationType;
+import tray.notification.TrayNotification;
 
 import java.io.IOException;
 import java.net.URL;
@@ -27,23 +40,62 @@ import java.util.ResourceBundle;
 
 public class LoginController implements Initializable {
     @FXML
-    private VBox vBox;
+    private MFXButton cancelBtn;
+
+    @FXML
+    private MFXButton changePasswordBtn;
+
+    @FXML
+    public static ImageView close_white_signUp;
 
     @FXML
     private VBox createAccount_vBox;
+
+    @FXML
+    private MFXTextField fg_emailTextField;
+
+    @FXML
+    private MFXPasswordField fg_passwordTextField_new;
+
+    @FXML
+    private MFXPasswordField fg_passwordTextField_newReEnter;
+
+    @FXML
+    public JFXDialog forgotPasswordDialogBox;
+
+    @FXML
+    private Text ibank_signUp;
+
+    @FXML
+    private ImageView logo_signUp;
+
+    @FXML
+    public StackPane parentDialogShow;
+    @FXML
+    public AnchorPane anchorBlur;
+    @FXML
+    public AnchorPane dialogAnchor;
+
     @FXML
     private VBox signIn_vBox;
 
     @FXML
-    private ImageView logo_signUp;
-    @FXML
-    private Text ibank_signUp;
+    private VBox vBox;
 
     public static VBox container;
     public static VBox container_iBank;
     public static VBox panel;
     public static Text iBankText;
     public static ImageView logo_img;
+    public static JFXDialog forgotPassDialog;
+    public static StackPane blurStack;
+    public static AnchorPane blurAnchor;
+    public static MFXButton cancelButton;
+    public static MFXButton changePasswordButton;
+    public static AnchorPane dialogAnchorBlur;
+    public static MFXTextField fgEmail;
+    public static MFXPasswordField fgPassNew;
+    public static MFXPasswordField fgPassNewRe;
 
     private static Parent fxml;
 
@@ -52,6 +104,18 @@ public class LoginController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         logInAccount();
 
+        fgEmail = fg_emailTextField;
+        fgPassNew = fg_passwordTextField_new;
+        fgPassNewRe = fg_passwordTextField_newReEnter;
+
+        forgotPassDialog = forgotPasswordDialogBox;
+        blurStack = parentDialogShow;
+        blurAnchor = anchorBlur;
+        forgotPassDialog.setDialogContainer(blurStack);
+
+        dialogAnchorBlur = dialogAnchor;
+        cancelButton = cancelBtn;
+        changePasswordButton = changePasswordBtn;
         iBankText = ibank_signUp;
         logo_img = logo_signUp;
         container = createAccount_vBox;
@@ -107,7 +171,7 @@ public class LoginController implements Initializable {
                 TranslateTransition translateTransition = new TranslateTransition(Duration.seconds(1), panel);
                 translateTransition.setToX(0);
                 translateTransition.play();
-                fadeInLogoAndText();
+                fadeInLogoAndText(logo_img, iBankText);
                 translateSignUpPane();
                 translateTransition.setOnFinished(e -> {
 
@@ -217,9 +281,9 @@ public class LoginController implements Initializable {
         fadeTransition1.play();
     }
 
-    private static void fadeInLogoAndText(){
+    public static void fadeInLogoAndText(ImageView logo, Text logoText){
         FadeTransition fadeTransition = new FadeTransition();
-        fadeTransition.setNode(logo_img);
+        fadeTransition.setNode(logo);
         fadeTransition.setDuration(Duration.seconds(1));
         fadeTransition.setInterpolator(Interpolator.EASE_IN);
         fadeTransition.setFromValue(0);
@@ -227,7 +291,7 @@ public class LoginController implements Initializable {
         fadeTransition.play();
 
         FadeTransition fadeTransition1 = new FadeTransition();
-        fadeTransition1.setNode(iBankText);
+        fadeTransition1.setNode(logoText);
         fadeTransition1.setDuration(Duration.seconds(1));
         fadeTransition1.setInterpolator(Interpolator.EASE_IN);
         fadeTransition1.setFromValue(0);
@@ -235,5 +299,72 @@ public class LoginController implements Initializable {
         fadeTransition1.play();
     }
 
+
+    public static boolean isFoundDialog;
+    public static void forgotPassword(){
+        BoxBlur blur = new BoxBlur(3, 3, 3);
+
+        blurAnchor.setEffect(blur);
+        forgotPassDialog.show();
+        blurAnchor.setDisable(true);
+
+        forgotPassDialog.setOnMouseClicked(e ->{
+            blurAnchor.setEffect(null);
+            blurAnchor.setDisable(false);
+            fgPassNewRe.setText("");
+            fgEmail.setText("");
+            fgPassNew.setText("");
+        });
+
+        cancelButton.setOnAction(e ->{
+
+            forgotPassDialog.setOnDialogClosed((JFXDialogEvent event1) -> {
+                blurAnchor.setEffect(null);
+                fgPassNewRe.setText("");
+                fgEmail.setText("");
+                fgPassNew.setText("");
+            });
+
+            forgotPassDialog.close();
+
+            blurAnchor.setDisable(false);
+        });
+
+        changePasswordButton.setOnAction(event -> {
+            if (SignInIBankAccountTextController.validateEmail(fgEmail.getText()) &&
+                    fgPassNew.getText().equals(fgPassNewRe.getText())){
+                DatabaseConnection.forgotPassword(fgEmail.getText(), fgPassNew.getText());
+                if (isFoundDialog){
+                    String title = "Forgot password";
+                    String message = "Password changed successfully";
+                    TrayNotification tray = new TrayNotification();
+                    AnimationType type = AnimationType.POPUP;
+
+                    tray.setAnimationType(type);
+                    tray.setTitle(title);
+                    tray.setMessage(message);
+                    tray.setNotificationType(NotificationType.SUCCESS);
+                    tray.showAndDismiss(Duration.millis(5000));
+
+                    forgotPassDialog.setOnDialogClosed((JFXDialogEvent event1) -> {
+                        blurAnchor.setEffect(null);
+                        fgPassNewRe.setText("");
+                        fgEmail.setText("");
+                        fgPassNew.setText("");
+                    });
+
+                    forgotPassDialog.close();
+                    blurAnchor.setDisable(false);
+                }else {
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setContentText("Provided email not in database");
+                    alert.show();
+                }
+
+            }
+
+        });
+
+    }
 
 }

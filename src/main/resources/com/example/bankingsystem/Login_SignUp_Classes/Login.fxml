@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.*?>
+<?import io.github.palexdev.materialfx.controls.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.*?>
 <?import javafx.scene.image.*?>
@@ -19,23 +21,27 @@
             <Image url="@Polygon_green.png" />
          </image>
       </ImageView>
-      <AnchorPane layoutX="59.0" layoutY="54.0" prefHeight="538.0" prefWidth="713.0" style="-fx-background-color: #0E172A; -fx-background-radius: 10;">
+      <StackPane fx:id="parentDialogShow" layoutX="59.0" layoutY="54.0" style="-fx-background-color: #0E172A; -fx-background-radius: 10; -fx-border-radius: 10;">
          <children>
-            <VBox fx:id="signIn_vBox" layoutY="60.0" prefHeight="447.0" prefWidth="443.0" style="-fx-background-color: #0E172A;" />
-            <VBox fx:id="createAccount_vBox" layoutX="276.0" layoutY="39.0" prefHeight="462.0" prefWidth="433.0" style="-fx-background-color: #0E172A;" visible="false" />
-            <VBox fx:id="vBox" layoutX="442.0" prefHeight="538.0" prefWidth="271.0" style="-fx-background-color: white; -fx-background-radius: 10 10 10 10;" />
-            <Text fx:id="ibank_signUp" fill="#5530be" layoutX="59.0" layoutY="42.0" strokeType="OUTSIDE" strokeWidth="0.0" text="iBankAccount">
-               <font>
-                  <Font name="Segoe UI Semibold" size="12.0" />
-               </font>
-            </Text>
-            <ImageView fx:id="logo_signUp" fitHeight="45.0" fitWidth="51.0" layoutX="14.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@logo_blue.png" />
-               </image>
-            </ImageView>
+            <AnchorPane fx:id="anchorBlur" prefHeight="538.0" prefWidth="713.0" style="-fx-background-color: #0E172A; -fx-background-radius: 10;">
+               <children>
+                  <VBox fx:id="signIn_vBox" layoutY="60.0" prefHeight="447.0" prefWidth="443.0" style="-fx-background-color: #0E172A;" />
+                  <VBox fx:id="createAccount_vBox" layoutX="276.0" layoutY="39.0" prefHeight="462.0" prefWidth="433.0" style="-fx-background-color: #0E172A;" visible="false" />
+                  <VBox fx:id="vBox" layoutX="442.0" prefHeight="538.0" prefWidth="271.0" style="-fx-background-color: white; -fx-background-radius: 10 10 10 10;" />
+                  <Text fx:id="ibank_signUp" fill="#5530be" layoutX="59.0" layoutY="42.0" strokeType="OUTSIDE" strokeWidth="0.0" text="iBankAccount">
+                     <font>
+                        <Font name="Segoe UI Semibold" size="12.0" />
+                     </font>
+                  </Text>
+                  <ImageView fx:id="logo_signUp" fitHeight="45.0" fitWidth="51.0" layoutX="14.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@logo_blue.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </AnchorPane>
          </children>
-      </AnchorPane>
+      </StackPane>
       <Circle fill="#ae858a" layoutX="77.0" layoutY="585.0" radius="144.0" stroke="TRANSPARENT" strokeType="INSIDE" visible="false" />
       <ImageView fx:id="close_white_signUp" fitHeight="26.0" fitWidth="26.0" layoutX="14.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -45,5 +51,62 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </ImageView>
+      <JFXDialog fx:id="forgotPasswordDialogBox" layoutX="208.0" layoutY="204.0" maxHeight="240.0" maxWidth="416.0" minHeight="240.0" minWidth="416.0" prefHeight="240.0" prefWidth="416.0" style="-fx-background-radius: 0; -fx-border-radius: 0;">
+         <children>
+            <JFXDialogLayout alignment="CENTER" maxHeight="240.0" maxWidth="416.0" minHeight="240.0" minWidth="416.0" prefHeight="240.0" prefWidth="416.0" style="-fx-border-radius: 0; -fx-background-radius: 0;">
+               <children>
+                  <AnchorPane fx:id="dialogAnchor" maxHeight="240.0" maxWidth="416.0" minHeight="240.0" minWidth="416.0" prefHeight="240.0" prefWidth="416.0" style="-fx-background-color: white; -fx-background-radius: 0; -fx-border-radius: 0;" translateY="-42.0">
+                     <children>
+                        <MFXButton fx:id="changePasswordBtn" depthLevel="LEVEL1" layoutX="124.0" layoutY="205.0" prefHeight="40.0" prefWidth="146.0" rippleAnimateShadow="true" rippleRadius="20.0" styleClass="forgotPasswordButtons" stylesheets="@../banking_system.css" text="CHANGE PASSWORD" translateY="-5.0">
+                           <font>
+                              <Font name="Segoe UI Bold" size="12.0" />
+                           </font>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </MFXButton>
+                        <MFXTextField fx:id="fg_emailTextField" floatMode="DISABLED" layoutX="62.0" layoutY="49.0" minHeight="40.0" prefHeight="40.0" prefWidth="293.0" promptText="ENTER YOUR REGISTERED EMAIL ">
+                           <font>
+                              <Font name="Segoe UI Semibold" size="13.0" />
+                           </font>
+                           <opaqueInsets>
+                              <Insets left="10.0" />
+                           </opaqueInsets>
+                        </MFXTextField>
+                        <MFXPasswordField fx:id="fg_passwordTextField_new" floatMode="DISABLED" layoutX="62.0" layoutY="99.0" minHeight="40.0" prefHeight="40.0" prefWidth="293.0" promptText="ENTER NEW PASSWORD">
+                           <font>
+                              <Font name="Segoe UI Semibold" size="13.0" />
+                           </font>
+                           <opaqueInsets>
+                              <Insets left="10.0" />
+                           </opaqueInsets>
+                        </MFXPasswordField>
+                        <MFXPasswordField fx:id="fg_passwordTextField_newReEnter" floatMode="DISABLED" layoutX="62.0" layoutY="149.0" minHeight="40.0" prefHeight="40.0" prefWidth="293.0" promptText="RE-ENTER NEW PASSWORD">
+                           <font>
+                              <Font name="Segoe UI Semibold" size="13.0" />
+                           </font>
+                           <opaqueInsets>
+                              <Insets left="10.0" />
+                           </opaqueInsets>
+                        </MFXPasswordField>
+                        <MFXButton fx:id="cancelBtn" depthLevel="LEVEL1" layoutX="270.0" layoutY="205.0" prefHeight="40.0" prefWidth="146.0" rippleAnimateShadow="true" rippleRadius="20.0" styleClass="forgotPasswordButtons" stylesheets="@../banking_system.css" text="CANCEL" translateY="-5.0">
+                           <font>
+                              <Font name="Segoe UI Bold" size="12.0" />
+                           </font>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </MFXButton>
+                        <Text layoutX="117.0" layoutY="35.0" strokeType="OUTSIDE" strokeWidth="0.0" text="FORGOT PASSWORD">
+                           <font>
+                              <Font name="Segoe UI Semibold" size="19.0" />
+                           </font>
+                        </Text>
+                     </children>
+                  </AnchorPane>
+               </children>
+            </JFXDialogLayout>
+         </children>
+      </JFXDialog>
    </children>
 </Pane>

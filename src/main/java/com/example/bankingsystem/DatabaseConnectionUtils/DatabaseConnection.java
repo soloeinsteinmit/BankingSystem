@@ -1,5 +1,7 @@
 package com.example.bankingsystem.DatabaseConnectionUtils;
 
+import com.example.bankingsystem.Login_SignUp_Classes.CreateAccountController;
+import com.example.bankingsystem.Login_SignUp_Classes.LoginController;
 import com.example.bankingsystem.Login_SignUp_Classes.SignInIBankAccountTextController;
 import com.example.bankingsystem.MainDashboardClasses.DashboardController;
 import javafx.event.ActionEvent;
@@ -18,7 +20,7 @@ import java.util.Objects;
 
 public class DatabaseConnection {
 
-
+    public static boolean gmailIsFound;
     public static void signUpUser(String userFullName, String email, String user_password,
                                   String user_account_id){
         Connection connection = null;
@@ -30,18 +32,20 @@ public class DatabaseConnection {
         try{
             connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/banking_system_db", "root",
                     "programming");
-            psCheckUserExist = connection.prepareStatement("SELECT * FROM user_signup_table \n" +
-                                                            "WHERE user_email = ? AND account_id = ?");
+            psCheckUserExist = connection.prepareStatement("SELECT user_email FROM user_signup_table \n" +
+                                                            "WHERE user_email = ?");
             psCheckUserExist.setString(1, email);
-            psCheckUserExist.setString(2, user_account_id);
             resultSet = psCheckUserExist.executeQuery();
 
+
             if (resultSet.isBeforeFirst()){
-                System.out.println("User already exist");
+                gmailIsFound = true;
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setContentText("You cannot use this email, user already exist");
                 alert.show();
+
             } else {
+                gmailIsFound = false;
                 psInsert = connection.prepareStatement("INSERT INTO user_signup_table(user_full_name, user_email, " +
                         "user_password, date_registered, account_id)\n" +
                         "VALUES(?, ?, ?, ?, ?)");
@@ -56,6 +60,7 @@ public class DatabaseConnection {
                 psInsert.executeUpdate();
 
             }
+            CreateAccountController.isFound = gmailIsFound;
         }
         catch (SQLException e){
             e.printStackTrace();
@@ -124,9 +129,10 @@ public class DatabaseConnection {
     }
     public static String getUserName;
     public static boolean isEqual;
-    public static void signInUser(ActionEvent event, String fxmlFile, String email, String id_account, String password){
+
+
+    public static void signInUser( String email, String id_account, String password){
         Connection connection = null;
-        PreparedStatement psInsert = null;
         PreparedStatement psCheckUserExist = null;
         ResultSet resultSet = null;
         try {
@@ -144,8 +150,8 @@ public class DatabaseConnection {
             psCheckUserExist.setString(3, password);
             resultSet = psCheckUserExist.executeQuery();
             if (!resultSet.isBeforeFirst()){
-                /*isEqual = false;
-                SignInIBankAccountTextController.isEqualController = false;*/
+                isEqual = false;
+                SignInIBankAccountTextController.isEqualController = false;
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setContentText("Provided credentials are incorrect");
                 alert.show();
@@ -155,16 +161,17 @@ public class DatabaseConnection {
                     String retrievedAccountId = resultSet.getString("account_id");
                     String retrievedPassword = resultSet.getString("user_password");
                     String retrievedUserName = resultSet.getString("user_full_name");
+
                     if (retrievedEmail.equals(email) && retrievedAccountId.equals(id_account) &&
                             retrievedPassword.equals(password)){
-                        changeSceneToDashboard(event, fxmlFile, retrievedUserName, retrievedEmail, retrievedAccountId, retrievedPassword);
-                        /*isEqual = true;
-                        SignInIBankAccountTextController.isEqualController = true;
-                        email =retrievedEmail;
+                        isEqual = true;
+
+                        email = retrievedEmail;
                         id_account = retrievedAccountId;
                         password = retrievedPassword;
-                        getUserName = retrievedUserName;*/
+                        getUserName = retrievedUserName;
                         SignInIBankAccountTextController.userName = getUserName;
+                        System.out.println("db username = " + SignInIBankAccountTextController.userName);
                     }else {
                         System.out.println("Password,  email or account id did not match");
                         Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -174,6 +181,7 @@ public class DatabaseConnection {
                 }
             }
 
+            SignInIBankAccountTextController.isEqualController = isEqual;
 
         }
         catch (SQLException e){
@@ -205,6 +213,84 @@ public class DatabaseConnection {
                 }
             }
         }
+    }
+
+    public static boolean isFound;
+    public static void forgotPassword(String email, String password){
+        Connection connection = null;
+        PreparedStatement psInsertNewPassword = null;
+        PreparedStatement psCheckEmailExist = null;
+        ResultSet resultSet = null;
+
+        try {
+            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/banking_system_db", "root",
+                    "programming");
+
+            psCheckEmailExist = connection.prepareStatement("""
+                    SELECT user_signup_table.user_email, user_signup_table.user_password
+                    FROM user_signup_table
+                    WHERE user_email = ?""");
+
+            psCheckEmailExist.setString(1, email);
+            resultSet = psCheckEmailExist.executeQuery();
+
+            if (!resultSet.isBeforeFirst()){
+                isFound = false;
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setContentText("Provided email not in database");
+                alert.show();
+            } else {
+                while (resultSet.next()){
+                    isFound = true;
+                    psInsertNewPassword = connection.prepareStatement("""
+                            UPDATE user_signup_table
+                            SET user_signup_table.user_password = ?\s
+                            WHERE user_email = ?""");
+                    psInsertNewPassword.setString(1, password);
+                    psInsertNewPassword.setString(2, email);
+                    psInsertNewPassword.executeUpdate();
+                }
+            }
+            LoginController.isFoundDialog = isFound;
+
+        } catch (SQLException e){
+            e.printStackTrace();
+            e.getCause();
+        } finally {
+            if (resultSet != null){
+                try {
+                    resultSet.close();
+                } catch (SQLException e){
+                    e.printStackTrace();
+                    e.getCause();
+                }
+            }
+            if (psInsertNewPassword != null){
+                try {
+                    psInsertNewPassword.close();
+                } catch (SQLException e){
+                    e.printStackTrace();
+                    e.getCause();
+                }
+            }
+            if (psCheckEmailExist != null){
+                try {
+                    psCheckEmailExist.close();
+                } catch (SQLException e){
+                    e.printStackTrace();
+                    e.getCause();
+                }
+            }
+            if (connection != null){
+                try {
+                    connection.close();
+                } catch (SQLException e){
+                    e.printStackTrace();
+                    e.getCause();
+                }
+            }
+        }
+
     }
 
 }

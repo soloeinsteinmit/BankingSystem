@@ -40,12 +40,12 @@
             <Glow />
          </effect>
       </Polygon>
-      <Text fill="WHITE" layoutX="59.0" layoutY="42.0" strokeType="OUTSIDE" strokeWidth="0.0" text="iBankAccount">
+      <Text fx:id="logo_text" fill="WHITE" layoutX="59.0" layoutY="42.0" strokeType="OUTSIDE" strokeWidth="0.0" text="iBankAccount">
          <font>
             <Font name="Segoe UI Semibold" size="12.0" />
          </font>
       </Text>
-      <ImageView fitHeight="45.0" fitWidth="51.0" layoutX="14.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="logo_white" fitHeight="45.0" fitWidth="51.0" layoutX="14.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@logo_white.png" />
          </image>

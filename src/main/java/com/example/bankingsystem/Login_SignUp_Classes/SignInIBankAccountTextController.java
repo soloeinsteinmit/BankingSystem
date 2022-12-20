@@ -1,29 +1,39 @@
 package com.example.bankingsystem.Login_SignUp_Classes;
 
 import com.example.bankingsystem.DatabaseConnectionUtils.DatabaseConnection;
+import com.example.bankingsystem.MainDashboardClasses.DashboardController;
 import io.github.palexdev.materialfx.controls.MFXButton;
+import io.github.palexdev.materialfx.controls.MFXPasswordField;
+import io.github.palexdev.materialfx.controls.MFXTextField;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
+import javafx.util.Duration;
+import tray.animations.AnimationType;
+import tray.notification.NotificationType;
+import tray.notification.TrayNotification;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class SignInIBankAccountTextController implements Initializable {
 
     @FXML
-    private TextField acc_id_textField_signUp;
+    private MFXTextField acc_id_textField_signUp;
 
     @FXML
-    private TextField email_textField_signUp;
+    private MFXTextField email_textField_signUp;
 
     @FXML
     private Label forgot_password;
@@ -32,10 +42,7 @@ public class SignInIBankAccountTextController implements Initializable {
     private Circle moving_ball;
 
     @FXML
-    private PasswordField password_textField_signUp;
-
-    @FXML
-    private Label show_signUp;
+    private MFXPasswordField password_textField_signUp;
 
     @FXML
     private MFXButton sign_btn;
@@ -48,11 +55,12 @@ public class SignInIBankAccountTextController implements Initializable {
     private Scene scene;
     public static String userName;
     public static boolean isEqualController;
+    public static MFXTextField getEmailText;
 
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
+        getEmailText = email_textField_signUp;
         /*TranslateTransition translateTransition1 = new TranslateTransition(Duration.seconds(8), moving_ball);
         translateTransition1.setToX(translateSignUpPane.getWidth());
         translateTransition1.setToY(translateSignUpPane.getHeight());
@@ -68,7 +76,9 @@ public class SignInIBankAccountTextController implements Initializable {
             translateTransition2.play();
         });*/
 
-
+        forgot_password.setOnMouseClicked(event -> {
+            LoginController.forgotPassword();
+        });
         signIn_User();
 
     }
@@ -80,45 +90,74 @@ public class SignInIBankAccountTextController implements Initializable {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setContentText("Please fill in all the forms");
                 alert.show();
-            }else{
-//                if (isEqualController){
-                    /*try {
+            } else{
+                try {
+                    FXMLLoader loader = new FXMLLoader(CreateAccountController.class.getResource("dashboard.fxml"));
+                    root = loader.load();
 
-                        FXMLLoader loader = new FXMLLoader(CreateAccountController.class.getResource("dashboard.fxml"));
-                        root = loader.load();
+                    DashboardController getUserCredentials = loader.getController();
+                    DatabaseConnection.signInUser(email_textField_signUp.getText(), acc_id_textField_signUp.getText(),
+                            password_textField_signUp.getText());
 
+                    if (isEqualController && validateEmail(getEmailText.getText())){
 
-                        DashboardController getUserCredentials = loader.getController();
                         getUserCredentials.setUserCredentials(userName,
                                 email_textField_signUp.getText(), acc_id_textField_signUp.getText(),
                                 password_textField_signUp.getText());
 
+                        stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+                        scene = new Scene(root);
+                        stage.setScene(scene);
+                        stage.show();
 
-                    } catch (IOException ex) {
-                        System.out.println(" error dashboard fxml");
-                        throw new RuntimeException(ex);
+                        String title = "SIGNING IN";
+                        String message = userName.toUpperCase() + " HAS SUCCESSFULLY SIGNED IN";
+                        TrayNotification tray = new TrayNotification();
+                        AnimationType type = AnimationType.POPUP;
+
+                        tray.setAnimationType(type);
+                        tray.setTitle(title);
+                        tray.setMessage(message);
+                        tray.setNotificationType(NotificationType.SUCCESS);
+                        tray.showAndDismiss(Duration.millis(5000));
                     }
+                    System.out.println("userName = " + userName);
+                } catch (IOException ex) {
+                    System.out.println(" error dashboard fxml");
+                    throw new RuntimeException(ex);
+                }
 
-                    stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
-                    scene = new Scene(root);
-                    stage.setScene(scene);
-                    stage.show();*/
-                    DatabaseConnection.signInUser(event, "dashboard.fxml", email_textField_signUp.getText(),
-                            acc_id_textField_signUp.getText(), password_textField_signUp.getText());
 
-                    /*System.out.println("userName string = "+userName);
-                    System.out.println("userName string = "+isEqualController);
-                    System.out.println("Login successful");*/
-    /*} else {
-        System.out.println("is equal else"+isEqualController);
-        System.out.println(isEqualController);
-        System.out.println(isEqualController);
-        Alert alert = new Alert(Alert.AlertType.ERROR);
-        alert.setContentText("Please provide correct credentials");
-        alert.show();
-    }*/
-
-            }
+                //DatabaseConnection.signInUser(event, "dashboard.fxml", email_textField_signUp.getText(),
+                  //      acc_id_textField_signUp.getText(), password_textField_signUp.getText());
+             }
         });
+    }
+
+     public static boolean validateEmail(String emailText){
+        Pattern pattern = Pattern.compile("[a-zA-Z0-9][a-zA-Z0-9._]*@[a-zA-Z0-9]+([.][a-zA-Z]+)+");
+        Matcher matcher = pattern.matcher(emailText);
+        if (matcher.find() && matcher.group().equals(emailText)){
+            return true;
+        } else {
+
+            String title = "Email Validation Error";
+            String message = "Please enter a valid email";
+            TrayNotification tray = new TrayNotification();
+            AnimationType type = AnimationType.POPUP;
+
+            tray.setAnimationType(type);
+            tray.setTitle(title);
+            tray.setMessage(message);
+            tray.setNotificationType(NotificationType.ERROR);
+            tray.showAndDismiss(Duration.millis(3000));
+            
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Validate Email");
+            alert.setHeaderText(null);
+            alert.setContentText("Please enter a valid email");
+            alert.showAndWait();
+            return false;
+        }
     }
 }
