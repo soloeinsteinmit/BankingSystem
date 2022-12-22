@@ -1,0 +1,356 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import io.github.palexdev.materialfx.controls.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="643.0" prefWidth="772.0" style="-fx-background-color: #0E172A; -fx-background-radius: 0 40 40 0;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.bankingsystem.HomeController">
+   <children>
+      <Pane layoutX="504.0" layoutY="19.0" prefHeight="606.0" prefWidth="247.0" style="-fx-background-color: #172242; -fx-background-radius: 20;">
+         <children>
+            <MFXButton fx:id="logoutBtn" alignment="CENTER" computeRadiusMultiplier="false" contentDisplay="GRAPHIC_ONLY" depthLevel="LEVEL0" layoutX="197.0" layoutY="18.0" minHeight="28.0" minWidth="28.0" prefHeight="28.0" prefWidth="28.0" rippleColor="#bdbdbd00" styleClass="rightPaneBtns" stylesheets="@dashboard.css">
+               <graphic>
+                  <ImageView fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@logout.png" />
+                     </image>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </ImageView>
+               </graphic>
+            </MFXButton>
+            <Label fx:id="user_name" layoutX="53.0" layoutY="17.0" prefHeight="30.0" prefWidth="126.0" text="SOLOMON ESHUN" textFill="WHITE" wrapText="true">
+               <font>
+                  <Font name="Comfortaa Bold" size="11.0" />
+               </font>
+            </Label>
+            <ImageView fitHeight="30.0" fitWidth="30.0" layoutX="14.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@male_user.png" />
+               </image>
+            </ImageView>
+            <Text fill="WHITE" layoutX="16.0" layoutY="82.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Wallet">
+               <font>
+                  <Font name="Comfortaa Bold" size="13.0" />
+               </font>
+            </Text>
+            <MFXButton alignment="CENTER" computeRadiusMultiplier="false" contentDisplay="GRAPHIC_ONLY" depthLevel="LEVEL0" layoutX="197.0" layoutY="63.0" minHeight="28.0" minWidth="30.0" prefHeight="30.0" prefWidth="30.0" rippleColor="#bdbdbd00" styleClass="rightPaneBtns" stylesheets="@dashboard.css">
+               <graphic>
+                  <ImageView fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@menu2.png" />
+                     </image>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </ImageView>
+               </graphic>
+            </MFXButton>
+            <Text fill="WHITE" layoutX="14.0" layoutY="306.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Quick Transfer">
+               <font>
+                  <Font name="Comfortaa Bold" size="13.0" />
+               </font>
+            </Text>
+            <MFXButton alignment="CENTER" computeRadiusMultiplier="false" contentDisplay="GRAPHIC_ONLY" depthLevel="LEVEL0" layoutX="197.0" layoutY="288.0" maxHeight="28.0" maxWidth="28.0" minHeight="28.0" minWidth="28.0" prefHeight="28.0" prefWidth="28.0" rippleColor="#bdbdbd00" styleClass="rightPaneBtns" stylesheets="@dashboard.css">
+               <graphic>
+                  <ImageView fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@menu2.png" />
+                     </image>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </ImageView>
+               </graphic>
+            </MFXButton>
+            <MFXTextField floatMode="DISABLED" layoutX="14.0" layoutY="327.0" minHeight="30.0" prefHeight="30.0" prefWidth="177.0" promptText="Account id" stylesheets="@dashboard.css">
+               <font>
+                  <Font name="Comfortaa SemiBold" size="11.0" />
+               </font>
+               <padding>
+                  <Insets left="10.0" />
+               </padding>
+            </MFXTextField>
+            <MFXButton alignment="CENTER" computeRadiusMultiplier="false" contentDisplay="GRAPHIC_ONLY" layoutX="197.0" layoutY="327.0" maxHeight="30.0" maxWidth="30.0" minHeight="30.0" minWidth="30.0" prefHeight="30.0" prefWidth="30.0" rippleColor="#bdbdbd00" styleClass="transactBtn" stylesheets="@dashboard.css">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+               <graphic>
+                  <ImageView fitHeight="18.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@send.png" />
+                     </image>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </ImageView>
+               </graphic>
+            </MFXButton>
+            <Text fill="WHITE" layoutX="14.0" layoutY="407.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Contact">
+               <font>
+                  <Font name="Comfortaa Bold" size="13.0" />
+               </font>
+            </Text>
+            <Label layoutX="213.0" layoutY="394.0" styleClass="contactLabel" stylesheets="@dashboard.css" text="16" textFill="#979090">
+               <font>
+                  <Font name="Yu Gothic Bold" size="14.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Label>
+            <ImageView fitHeight="30.0" fitWidth="30.0" layoutX="14.0" layoutY="420.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@male_user.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="30.0" fitWidth="30.0" layoutX="58.0" layoutY="420.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@male_user.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="30.0" fitWidth="30.0" layoutX="101.0" layoutY="420.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@male_user.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="30.0" fitWidth="30.0" layoutX="140.0" layoutY="420.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@male_user.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="30.0" fitWidth="30.0" layoutX="184.0" layoutY="420.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@male_user.png" />
+               </image>
+            </ImageView>
+            <MFXButton alignment="CENTER" computeRadiusMultiplier="false" contentDisplay="GRAPHIC_ONLY" depthLevel="LEVEL0" layoutX="197.0" layoutY="466.0" maxHeight="28.0" maxWidth="28.0" minHeight="28.0" minWidth="28.0" prefHeight="28.0" prefWidth="28.0" rippleColor="#bdbdbd00" styleClass="rightPaneBtns" stylesheets="@dashboard.css">
+               <graphic>
+                  <ImageView fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@forward.png" />
+                     </image>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </ImageView>
+               </graphic>
+            </MFXButton>
+            <Text fill="WHITE" layoutX="14.0" layoutY="484.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Recent">
+               <font>
+                  <Font name="Comfortaa Bold" size="13.0" />
+               </font>
+            </Text>
+            <Pane layoutX="89.0" layoutY="117.0" prefHeight="159.0" prefWidth="126.0" rotate="13.6" style="-fx-background-color: #0e172a; -fx-background-radius: 15;" />
+            <MFXButton alignment="CENTER" computeRadiusMultiplier="false" contentDisplay="GRAPHIC_ONLY" depthLevel="LEVEL0" layoutX="197.0" layoutY="135.0" minHeight="28.0" minWidth="28.0" prefHeight="28.0" prefWidth="28.0" rippleColor="#bdbdbd00" styleClass="mainPaneBtns" stylesheets="@dashboard.css">
+               <graphic>
+                  <ImageView fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@plus.png" />
+                     </image>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </ImageView>
+               </graphic>
+            </MFXButton>
+            <ImageView fitHeight="180.0" fitWidth="177.0" layoutX="16.0" layoutY="102.0" pickOnBounds="true">
+               <image>
+                  <Image url="@cardView.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="26.0" fitWidth="53.0" layoutX="26.0" layoutY="119.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@visa.png" />
+               </image>
+            </ImageView>
+            <Text fill="#949292" layoutX="28.0" layoutY="164.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Active balance">
+               <font>
+                  <Font name="Comfortaa Bold" size="12.0" />
+               </font>
+            </Text>
+            <Label fx:id="user_password121" layoutX="25.0" layoutY="170.0" prefHeight="27.0" prefWidth="21.0" text="\$" textFill="WHITE" wrapText="true">
+               <font>
+                  <Font name="Rockwell" size="25.0" />
+               </font>
+            </Label>
+            <Label layoutX="40.0" layoutY="169.0" prefHeight="33.0" prefWidth="149.0" text="12545.720" textFill="WHITE" wrapText="true">
+               <font>
+                  <Font name="Rockwell" size="25.0" />
+               </font>
+            </Label>
+            <Label fx:id="abbr_name" layoutX="25.0" layoutY="236.0" prefHeight="30.0" prefWidth="118.0" text="S Eshun" textFill="WHITE" wrapText="true">
+               <font>
+                  <Font name="Comfortaa Bold" size="12.0" />
+               </font>
+            </Label>
+            <Label layoutX="154.0" layoutY="235.0" prefHeight="30.0" prefWidth="41.0" text="05/24" textFill="WHITE" wrapText="true">
+               <font>
+                  <Font name="Comfortaa Bold" size="12.0" />
+               </font>
+            </Label>
+            <Label layoutX="22.0" layoutY="203.0" prefHeight="30.0" prefWidth="166.0" text="1234 4321 4987 1234" textFill="WHITE" wrapText="true">
+               <font>
+                  <Font name="OCR A Extended" size="14.0" />
+               </font>
+            </Label>
+         </children>
+      </Pane>
+      <Pane layoutX="14.0" layoutY="87.0" prefHeight="200.0" prefWidth="211.0" style="-fx-background-color: #172242; -fx-background-radius: 15;">
+         <children>
+            <ImageView fitHeight="200.0" fitWidth="211.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@frameView.png" />
+               </image>
+            </ImageView>
+            <Text fill="WHITE" layoutX="14.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Income">
+               <font>
+                  <Font name="Comfortaa Bold" size="12.0" />
+               </font>
+            </Text>
+            <Label layoutX="14.0" layoutY="33.0" prefHeight="27.0" prefWidth="21.0" text="\$" textFill="WHITE" wrapText="true">
+               <font>
+                  <Font name="Rockwell" size="24.0" />
+               </font>
+            </Label>
+            <Label layoutX="34.0" layoutY="31.0" prefHeight="33.0" prefWidth="149.0" text="56.90" textFill="WHITE" wrapText="true">
+               <font>
+                  <Font name="Rockwell" size="24.0" />
+               </font>
+            </Label>
+            <Text fill="WHITE" layoutX="14.0" layoutY="101.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Outcome">
+               <font>
+                  <Font name="Comfortaa Bold" size="12.0" />
+               </font>
+            </Text>
+            <Label layoutX="14.0" layoutY="108.0" prefHeight="27.0" prefWidth="21.0" text="\$" textFill="WHITE" wrapText="true">
+               <font>
+                  <Font name="Rockwell" size="24.0" />
+               </font>
+            </Label>
+            <Label layoutX="34.0" layoutY="105.0" prefHeight="33.0" prefWidth="149.0" text="12545.720" textFill="WHITE" wrapText="true">
+               <font>
+                  <Font name="Rockwell" size="24.0" />
+               </font>
+            </Label>
+            <Text fill="WHITE" layoutX="43.0" layoutY="183.0" opacity="0.84" strokeType="OUTSIDE" strokeWidth="0.0" text="Month of">
+               <font>
+                  <Font name="Comfortaa Bold" size="11.0" />
+               </font>
+            </Text>
+            <Label fx:id="current_Month" layoutX="98.0" layoutY="168.0" prefHeight="21.0" prefWidth="103.0" text="June" textFill="WHITE" wrapText="true">
+               <font>
+                  <Font name="Comfortaa Bold" size="11.0" />
+               </font>
+            </Label>
+         </children></Pane>
+      <Pane layoutX="241.0" layoutY="87.0" prefHeight="200.0" prefWidth="116.0" style="-fx-background-color: #172242; -fx-background-radius: 15;">
+         <children>
+            <Circle fill="#65696e6c" layoutX="17.0" layoutY="18.0" radius="13.0" stroke="#ffffff00" strokeType="INSIDE" />
+            <ImageView fitHeight="14.0" fitWidth="20.0" layoutX="10.0" layoutY="11.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@top_expenses.png" />
+               </image>
+            </ImageView>
+            <Text fill="#949292" layoutX="36.0" layoutY="23.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Top Expenses">
+               <font>
+                  <Font name="Segoe UI Semibold" size="12.0" />
+               </font>
+            </Text>
+         </children></Pane>
+      <Pane layoutX="372.0" layoutY="87.0" prefHeight="90.0" prefWidth="116.0" style="-fx-background-color: #172242; -fx-background-radius: 15;">
+         <children>
+            <Circle fill="#65696e6c" layoutX="17.0" layoutY="17.0" radius="13.0" stroke="#ffffff00" strokeType="INSIDE" />
+            <ImageView fitHeight="14.0" fitWidth="20.0" layoutX="10.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@free_transfer.png" />
+               </image>
+            </ImageView>
+            <Text fill="WHITE" layoutX="39.0" layoutY="65.0" strokeType="OUTSIDE" strokeWidth="0.0" text="/ Remaining">
+               <font>
+                  <Font name="Comfortaa Bold" size="11.0" />
+               </font>
+            </Text>
+            <Text fill="#949292" layoutX="34.0" layoutY="20.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Free Transfer">
+               <font>
+                  <Font name="Segoe UI Semibold" size="12.0" />
+               </font>
+            </Text>
+            <Label layoutX="9.0" layoutY="39.0" prefHeight="33.0" prefWidth="30.0" text="28" textFill="WHITE" wrapText="true">
+               <font>
+                  <Font name="Rockwell" size="27.0" />
+               </font>
+            </Label>
+         </children></Pane>
+      <Pane layoutX="372.0" layoutY="197.0" prefHeight="90.0" prefWidth="116.0" style="-fx-background-color: #172242; -fx-background-radius: 15;">
+         <children>
+            <MFXProgressSpinner layoutX="17.0" layoutY="7.0" prefHeight="76.0" prefWidth="83.0" progress="0.68" />
+         </children>
+      </Pane>
+      <Text fill="WHITE" layoutX="14.0" layoutY="66.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Overview">
+         <font>
+            <Font name="Comfortaa Bold" size="14.0" />
+         </font>
+      </Text>
+      <MFXButton alignment="CENTER" computeRadiusMultiplier="false" contentDisplay="GRAPHIC_ONLY" depthLevel="LEVEL0" layoutX="434.0" layoutY="47.0" maxHeight="28.0" maxWidth="28.0" minHeight="28.0" minWidth="28.0" prefHeight="28.0" prefWidth="28.0" rippleColor="#bdbdbd00" styleClass="mainPaneBtns" stylesheets="@dashboard.css">
+         <graphic>
+            <ImageView fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@menu2.png" />
+               </image>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </ImageView>
+         </graphic>
+      </MFXButton>
+      <Text fill="WHITE" layoutX="14.0" layoutY="353.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Transactions">
+         <font>
+            <Font name="Comfortaa Bold" size="14.0" />
+         </font>
+      </Text>
+      <Label fx:id="user_email" alignment="CENTER" layoutX="177.0" layoutY="467.0" prefHeight="30.0" prefWidth="211.0" text="solomoneinsteinmit@gmail.com" textFill="WHITE" wrapText="true">
+         <font>
+            <Font name="Segoe UI Semibold" size="14.0" />
+         </font>
+      </Label>
+      <Label fx:id="user_acc_id" layoutX="207.0" layoutY="508.0" text="13464" textFill="WHITE" wrapText="true">
+         <font>
+            <Font name="Segoe UI Semibold" size="15.0" />
+         </font>
+      </Label>
+      <Label fx:id="user_password" layoutX="343.0" layoutY="503.0" prefHeight="27.0" prefWidth="53.0" text="great" textFill="WHITE" wrapText="true">
+         <font>
+            <Font name="Segoe UI Semibold" size="15.0" />
+         </font>
+      </Label>
+      <Text fill="WHITE" layoutX="261.0" layoutY="524.0" strokeType="OUTSIDE" strokeWidth="0.0" text="PASSWORD: ">
+         <font>
+            <Font name="Segoe UI Semibold" size="14.0" />
+         </font>
+      </Text>
+      <Text fill="WHITE" layoutX="182.0" layoutY="523.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ID: ">
+         <font>
+            <Font name="Segoe UI Semibold" size="14.0" />
+         </font>
+      </Text>
+      <MFXButton alignment="CENTER" computeRadiusMultiplier="false" contentDisplay="GRAPHIC_ONLY" depthLevel="LEVEL0" layoutX="434.0" layoutY="334.0" maxHeight="28.0" maxWidth="28.0" minHeight="28.0" minWidth="28.0" prefHeight="28.0" prefWidth="28.0" rippleColor="#bdbdbd00" styleClass="mainPaneBtns" stylesheets="@dashboard.css">
+         <graphic>
+            <ImageView fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@menu2.png" />
+               </image>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </ImageView>
+         </graphic>
+      </MFXButton>
+   </children>
+</AnchorPane>

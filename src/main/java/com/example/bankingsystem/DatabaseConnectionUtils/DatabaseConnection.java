@@ -1,22 +1,13 @@
 package com.example.bankingsystem.DatabaseConnectionUtils;
 
-import com.example.bankingsystem.Login_SignUp_Classes.CreateAccountController;
-import com.example.bankingsystem.Login_SignUp_Classes.LoginController;
-import com.example.bankingsystem.Login_SignUp_Classes.SignInIBankAccountTextController;
-import com.example.bankingsystem.MainDashboardClasses.DashboardController;
-import javafx.event.ActionEvent;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
+import com.example.bankingsystem.CreateAccountController;
+import com.example.bankingsystem.LoginController;
+import com.example.bankingsystem.SignInIBankAccountTextController;
 import javafx.scene.control.Alert;
-import javafx.stage.Stage;
 
-import java.io.IOException;
 import java.sql.*;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.Objects;
 
 public class DatabaseConnection {
 
@@ -49,6 +40,7 @@ public class DatabaseConnection {
                 psInsert = connection.prepareStatement("INSERT INTO user_signup_table(user_full_name, user_email, " +
                         "user_password, date_registered, account_id)\n" +
                         "VALUES(?, ?, ?, ?, ?)");
+
                 Date date = new Date();
                 SimpleDateFormat dateFormat = new SimpleDateFormat("Y-MM-dd");
 
@@ -101,32 +93,6 @@ public class DatabaseConnection {
         }
     }
 
-    /*
-    * this method gives an IllegalStateException
-    * */
-    public static void changeSceneToDashboard(ActionEvent event, String fxmlFile, String name,
-              String email, String accountId, String password){
-        Parent root = null;
-        if (name != null && email != null && accountId != null && password != null){
-            try{
-                FXMLLoader loader = new FXMLLoader(DatabaseConnection.class.getResource(fxmlFile));
-                root = loader.load();
-                DashboardController setUserCredentials = loader.getController();
-                setUserCredentials.setUserCredentials(name, email, accountId, password);
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-        }else {
-            try{
-                root = FXMLLoader.load(Objects.requireNonNull(DatabaseConnection.class.getResource(fxmlFile)));
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-        }
-        Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
-        stage.setScene(new Scene(root));
-        stage.show();
-    }
     public static String getUserName;
     public static boolean isEqual;
 

@@ -8,14 +8,14 @@
 <?import javafx.scene.paint.*?>
 <?import javafx.scene.text.*?>
 
-<Pane fx:id="translateSignInPane" prefHeight="462.0" prefWidth="433.0" style="-fx-background-color: #0E172A;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.bankingsystem.Login_SignUp_Classes.CreateAccountController">
+<Pane fx:id="translateSignInPane" prefHeight="462.0" prefWidth="433.0" style="-fx-background-color: #0E172A;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.bankingsystem.CreateAccountController">
    <children>
       <Text fill="#5530be" layoutX="44.0" layoutY="69.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Create Account" textAlignment="CENTER" wrappingWidth="344.4375">
          <font>
             <Font name="Leelawadee UI Bold" size="32.0" />
          </font>
       </Text>
-      <MFXButton fx:id="signUp_btn_signIn" alignment="CENTER" layoutX="138.0" layoutY="396.0" prefHeight="52.0" prefWidth="158.0" rippleAnimateShadow="true" rippleColor="#bdbdbd12" style="-fx-background-radius: 30;" styleClass="bg_color_btn" stylesheets="@../banking_system.css" text="SIGN UP" textFill="WHITE">
+      <MFXButton fx:id="signUp_btn_signIn" alignment="CENTER" layoutX="138.0" layoutY="396.0" prefHeight="52.0" prefWidth="158.0" rippleAnimateShadow="true" rippleColor="#bdbdbd12" style="-fx-background-radius: 30;" styleClass="bg_color_btn" stylesheets="@banking_system.css" text="SIGN UP" textFill="WHITE">
          <font>
             <Font name="Segoe UI Bold" size="15.0" />
          </font>
@@ -52,7 +52,7 @@
             <Font name="Segoe UI Semibold" size="12.0" />
          </font>
       </Text>
-      <MFXButton fx:id="generate_accId_btn" alignment="CENTER" depthLevel="LEVEL0" layoutX="236.0" layoutY="332.0" prefHeight="45.0" prefWidth="138.0" rippleAnimateShadow="true" rippleColor="#bdbdbd12" styleClass="gen_acc_id" stylesheets="@../banking_system.css" text="GENERATE ACCOUNT ID" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+      <MFXButton fx:id="generate_accId_btn" alignment="CENTER" depthLevel="LEVEL0" layoutX="236.0" layoutY="332.0" prefHeight="45.0" prefWidth="138.0" rippleAnimateShadow="true" rippleColor="#bdbdbd12" styleClass="gen_acc_id" stylesheets="@banking_system.css" text="GENERATE ACCOUNT ID" textAlignment="CENTER" textFill="WHITE" wrapText="true">
          <font>
             <Font name="Segoe UI Semibold" size="10.0" />
          </font>
@@ -60,7 +60,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </MFXButton>
-      <MFXTextField fx:id="name_textField_signIn" floatMode="DISABLED" layoutX="60.0" layoutY="162.0" minHeight="45.0" prefHeight="45.0" prefWidth="314.0" promptText="FULL NAME" stylesheets="@../banking_system.css">
+      <MFXTextField fx:id="name_textField_signIn" floatMode="DISABLED" layoutX="60.0" layoutY="162.0" minHeight="45.0" prefHeight="45.0" prefWidth="314.0" promptText="FULL NAME" stylesheets="@banking_system.css">
          <padding>
             <Insets left="30.0" />
          </padding>
@@ -76,7 +76,7 @@
             <Image url="@name.png" />
          </image>
       </ImageView>
-      <MFXTextField fx:id="email_textField_signIn" floatMode="DISABLED" layoutX="59.0" layoutY="219.0" minHeight="45.0" prefHeight="45.0" prefWidth="314.0" promptText="smithwills@gmail.com" stylesheets="@../banking_system.css">
+      <MFXTextField fx:id="email_textField_signIn" floatMode="DISABLED" layoutX="59.0" layoutY="219.0" minHeight="45.0" prefHeight="45.0" prefWidth="314.0" promptText="smithwills@gmail.com" stylesheets="@banking_system.css">
          <padding>
             <Insets left="30.0" />
          </padding>
@@ -92,7 +92,7 @@
             <Image url="@email.png" />
          </image>
       </ImageView>
-      <MFXPasswordField fx:id="password_textField_signIn" allowCopy="true" allowCut="true" allowPaste="true" floatMode="DISABLED" floatingTextGap="0.0" layoutX="60.0" layoutY="278.0" minHeight="45.0" prefHeight="45.0" prefWidth="314.0" promptText="PASSWORD" style="-fx-background-color: #172242; -fx-border-color: #172242; -fx-background-radius: 2; -fx-border-radius: 2; -fx-text-fill: white; -fx-prompt-text-fill: #BCBCBC;" stylesheets="@../banking_system.css">
+      <MFXPasswordField fx:id="password_textField_signIn" allowCopy="true" allowCut="true" allowPaste="true" floatMode="DISABLED" floatingTextGap="0.0" layoutX="60.0" layoutY="278.0" minHeight="45.0" prefHeight="45.0" prefWidth="314.0" promptText="PASSWORD" style="-fx-background-color: #172242; -fx-border-color: #172242; -fx-background-radius: 2; -fx-border-radius: 2; -fx-text-fill: white; -fx-prompt-text-fill: #BCBCBC;" stylesheets="@banking_system.css">
          <textFill>
             <Color red="1.0" green="1.0" blue="1.0" />
          </textFill>
@@ -111,7 +111,7 @@
             <Image url="@password.png" />
          </image>
       </ImageView>
-      <MFXTextField fx:id="account_id_textField_signIn" editable="false" floatMode="DISABLED" layoutX="60.0" layoutY="332.0" minHeight="45.0" prefHeight="45.0" prefWidth="170.0" promptText="ACCOUNT ID " stylesheets="@../banking_system.css">
+      <MFXTextField fx:id="account_id_textField_signIn" editable="false" floatMode="DISABLED" layoutX="60.0" layoutY="332.0" minHeight="45.0" prefHeight="45.0" prefWidth="170.0" promptText="ACCOUNT ID " stylesheets="@banking_system.css">
          <padding>
             <Insets left="30.0" />
          </padding>

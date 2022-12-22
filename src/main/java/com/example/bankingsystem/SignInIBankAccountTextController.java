@@ -1,7 +1,6 @@
-package com.example.bankingsystem.Login_SignUp_Classes;
+package com.example.bankingsystem;
 
 import com.example.bankingsystem.DatabaseConnectionUtils.DatabaseConnection;
-import com.example.bankingsystem.MainDashboardClasses.DashboardController;
 import io.github.palexdev.materialfx.controls.MFXButton;
 import io.github.palexdev.materialfx.controls.MFXPasswordField;
 import io.github.palexdev.materialfx.controls.MFXTextField;
@@ -23,6 +22,7 @@ import tray.notification.TrayNotification;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.Arrays;
 import java.util.ResourceBundle;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -96,16 +96,26 @@ public class SignInIBankAccountTextController implements Initializable {
                 try {
                     FXMLLoader loader = new FXMLLoader(getClass().getResource("dashboard.fxml"));
                     root = loader.load();
-
-                    DashboardController getUserCredentials = loader.getController();
                     DatabaseConnection.signInUser(email_textField_signUp.getText(), acc_id_textField_signUp.getText(),
                             password_textField_signUp.getText());
 
                     if (isEqualController && validateEmail(getEmailText.getText())){
 
-                        getUserCredentials.setUserCredentials(userName,
-                                email_textField_signUp.getText(), acc_id_textField_signUp.getText(),
-                                password_textField_signUp.getText());
+                        HomeController.str_userName = userName;
+                        HomeController.str_email = email_textField_signUp.getText();
+                        HomeController.str_accId = acc_id_textField_signUp.getText();
+                        HomeController.str_password = password_textField_signUp.getText();
+
+                        String[] splitName = userName.split(" ");
+                        String[] firstName = splitName[0].split("");
+                        // gotten abbr name
+                        HomeController.str_abbrName = firstName[0] + " " + splitName[splitName.length-1];
+                        System.out.println(HomeController.str_abbrName);
+
+                        System.out.println(Arrays.toString(splitName));
+                        System.out.println(Arrays.toString(firstName));
+
+                        HomeController.setUserCredentials();
 
                         stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
                         scene = new Scene(root);
@@ -153,13 +163,20 @@ public class SignInIBankAccountTextController implements Initializable {
             tray.setMessage(message);
             tray.setNotificationType(NotificationType.ERROR);
             tray.showAndDismiss(Duration.millis(3000));
-            
+
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setTitle("Validate Email");
             alert.setHeaderText(null);
             alert.setContentText("Please enter a valid email");
             alert.showAndWait();
             return false;
+
+
+
+        //final Tooltip tooltipFullScreen = new Tooltip();
+        //tooltipFullScreen.setText("Press to toggle full screen. Press Esc to exit full screen");
+        //tooltipFullScreen.setShowDelay(Duration.seconds(1));
+        //fullScreen.setTooltip(tooltipFullScreen);
         }
     }
 }

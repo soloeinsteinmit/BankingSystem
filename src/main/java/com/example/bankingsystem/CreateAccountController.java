@@ -1,7 +1,6 @@
-package com.example.bankingsystem.Login_SignUp_Classes;
+package com.example.bankingsystem;
 
 import com.example.bankingsystem.DatabaseConnectionUtils.DatabaseConnection;
-import com.example.bankingsystem.MainDashboardClasses.DashboardController;
 import io.github.palexdev.materialfx.controls.MFXButton;
 import io.github.palexdev.materialfx.controls.MFXPasswordField;
 import io.github.palexdev.materialfx.controls.MFXTextField;
@@ -98,7 +97,6 @@ public class CreateAccountController implements Initializable {
                     FXMLLoader loader = new FXMLLoader(getClass().getResource("dashboard.fxml"));
 
                     root = loader.load();
-                    DashboardController getUserCredentials = loader.getController();
 
                     DatabaseConnection.signUpUser(name_textField_signIn.getText(),
                             email_textField_signIn.getText(), password_textField_signIn.getText(),
@@ -108,10 +106,12 @@ public class CreateAccountController implements Initializable {
 
                     if (SignInIBankAccountTextController.validateEmail(email_textField_signIn.getText()) && !isFound){
 
+                        HomeController.str_userName = name_textField_signIn.getText();
+                        HomeController.str_email = email_textField_signIn.getText();
+                        HomeController.str_password = password_textField_signIn.getText();
+                        HomeController.str_accId = account_id_textField_signIn.getText();
 
-                        getUserCredentials.setUserCredentials(name_textField_signIn.getText(),
-                                email_textField_signIn.getText(), password_textField_signIn.getText(),
-                                account_id_textField_signIn.getText());
+                        HomeController.setUserCredentials();
 
                         stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
                         scene = new Scene(root);

@@ -11,7 +11,7 @@
 <?import javafx.scene.shape.*?>
 <?import javafx.scene.text.*?>
 
-<Pane fx:id="translateSignUpPane" prefHeight="462.0" prefWidth="443.0" style="-fx-background-color: #0E172A;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.bankingsystem.Login_SignUp_Classes.SignInIBankAccountTextController">
+<Pane fx:id="translateSignUpPane" prefHeight="462.0" prefWidth="443.0" style="-fx-background-color: #0E172A;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.bankingsystem.SignInIBankAccountTextController">
    <children>
       <Circle fx:id="moving_ball" fill="#1f93ff5d" layoutX="362.0" layoutY="275.0" radius="26.0" stroke="TRANSPARENT" strokeType="INSIDE">
          <effect>
@@ -23,7 +23,7 @@
             <Font name="Leelawadee UI Bold" size="26.0" />
          </font>
       </Text>
-      <Label fx:id="forgot_password" layoutX="153.0" layoutY="321.0" styleClass="forget_password" stylesheets="@../banking_system.css" text="Forgot your password?" textFill="#f5f0f0" wrapText="true">
+      <Label fx:id="forgot_password" layoutX="153.0" layoutY="321.0" styleClass="forget_password" stylesheets="@banking_system.css" text="Forgot your password?" textFill="#f5f0f0" wrapText="true">
          <font>
             <Font name="Segoe UI Light" size="14.0" />
          </font>
@@ -32,7 +32,7 @@
          </cursor>
       </Label>
       <Line endX="67.0" layoutX="222.0" layoutY="341.0" startX="-70.0" stroke="#e5e1e11e" strokeWidth="0.5" />
-      <MFXButton fx:id="sign_btn" alignment="CENTER" layoutX="142.0" layoutY="361.0" prefHeight="52.0" prefWidth="158.0" rippleAnimateShadow="true" rippleColor="#bdbdbd12" style="-fx-background-radius: 30;" styleClass="bg_color_btn" stylesheets="@../banking_system.css" text="SIGN IN" textFill="WHITE">
+      <MFXButton fx:id="sign_btn" alignment="CENTER" layoutX="142.0" layoutY="361.0" prefHeight="52.0" prefWidth="158.0" rippleAnimateShadow="true" rippleColor="#bdbdbd12" style="-fx-background-radius: 30;" styleClass="bg_color_btn" stylesheets="@banking_system.css" text="SIGN IN" textFill="WHITE">
          <font>
             <Font name="Segoe UI Bold" size="15.0" />
          </font>
@@ -74,7 +74,7 @@
             <Font name="Segoe UI Semibold" size="11.0" />
          </font>
       </Text>
-      <MFXPasswordField fx:id="password_textField_signUp" allowCopy="true" allowCut="true" allowPaste="true" floatMode="DISABLED" floatingTextGap="0.0" layoutX="64.0" layoutY="262.0" minHeight="45.0" prefHeight="45.0" prefWidth="314.0" promptText="PASSWORD" style="-fx-background-color: #172242; -fx-border-color: #172242; -fx-background-radius: 2; -fx-border-radius: 2; -fx-text-fill: white; -fx-prompt-text-fill: #BCBCBC;" stylesheets="@../banking_system.css" text="man">
+      <MFXPasswordField fx:id="password_textField_signUp" allowCopy="true" allowCut="true" allowPaste="true" floatMode="DISABLED" floatingTextGap="0.0" layoutX="64.0" layoutY="262.0" minHeight="45.0" prefHeight="45.0" prefWidth="314.0" promptText="PASSWORD" style="-fx-background-color: #172242; -fx-border-color: #172242; -fx-background-radius: 2; -fx-border-radius: 2; -fx-text-fill: white; -fx-prompt-text-fill: #BCBCBC;" stylesheets="@banking_system.css" text="man">
          <textFill>
             <Color red="1.0" green="1.0" blue="1.0" />
          </textFill>
@@ -93,7 +93,7 @@
             <Image url="@password.png" />
          </image>
       </ImageView>
-      <MFXTextField fx:id="email_textField_signUp" floatMode="DISABLED" layoutX="64.0" layoutY="145.0" minHeight="45.0" prefHeight="45.0" prefWidth="314.0" promptText="smithwills@gmail.com" stylesheets="@../banking_system.css" text="mac@gmail.com">
+      <MFXTextField fx:id="email_textField_signUp" floatMode="DISABLED" layoutX="64.0" layoutY="145.0" minHeight="45.0" prefHeight="45.0" prefWidth="314.0" promptText="smithwills@gmail.com" stylesheets="@banking_system.css" text="mac@gmail.com">
          <padding>
             <Insets left="30.0" />
          </padding>
@@ -109,7 +109,7 @@
             <Image url="@email.png" />
          </image>
       </ImageView>
-      <MFXTextField fx:id="acc_id_textField_signUp" floatMode="DISABLED" layoutX="63.0" layoutY="204.0" minHeight="45.0" prefHeight="45.0" prefWidth="314.0" promptText="ACCOUNT ID (EG: 12345)" stylesheets="@../banking_system.css" text="22501">
+      <MFXTextField fx:id="acc_id_textField_signUp" floatMode="DISABLED" layoutX="63.0" layoutY="204.0" minHeight="45.0" prefHeight="45.0" prefWidth="314.0" promptText="ACCOUNT ID (EG: 12345)" stylesheets="@banking_system.css" text="22501">
          <padding>
             <Insets left="30.0" />
          </padding>

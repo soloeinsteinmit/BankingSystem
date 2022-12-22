@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="643.0" prefWidth="772.0" style="-fx-background-color: #0E172A; -fx-background-radius: 0 40 40 0;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.bankingsystem.ActivityController">
+   <children>
+      <Label alignment="CENTER" layoutX="243.0" layoutY="314.0" text="I AM ACTIVITY" wrapText="true">
+         <font>
+            <Font name="Segoe UI Semibold" size="50.0" />
+         </font>
+         <textFill>
+            <LinearGradient endX="0.7345971563981042" endY="1.0">
+               <stops>
+                  <Stop>
+                     <color>
+                        <Color red="0.9868420958518982" green="0.009137426503002644" blue="0.009137426503002644" />
+                     </color>
+                  </Stop>
+                  <Stop offset="1.0">
+                     <color>
+                        <Color red="0.01027452852576971" green="0.006091617979109287" blue="0.1315789520740509" />
+                     </color>
+                  </Stop>
+               </stops>
+            </LinearGradient>
+         </textFill>
+      </Label>
+   </children>
+</AnchorPane>

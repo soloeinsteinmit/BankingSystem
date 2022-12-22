@@ -8,7 +8,7 @@
 <?import javafx.scene.shape.*?>
 <?import javafx.scene.text.*?>
 
-<Pane fx:id="sign_up" prefHeight="538.0" prefWidth="271.0" style="-fx-background-color: #5530be; -fx-background-radius: 0 10 10 0;" styleClass="bg_color" stylesheets="@../banking_system.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.bankingsystem.Login_SignUp_Classes.SignUpController">
+<Pane fx:id="sign_up" prefHeight="538.0" prefWidth="271.0" style="-fx-background-color: #5530be; -fx-background-radius: 0 10 10 0;" styleClass="bg_color" stylesheets="@banking_system.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.bankingsystem.SignUpController">
    <children>
       <Circle fill="#16214021" layoutX="34.0" layoutY="361.0" radius="13.0" stroke="TRANSPARENT" strokeType="INSIDE">
          <effect>
@@ -32,7 +32,7 @@
             <Font name="Segoe UI Semibold" size="14.0" />
          </font>
       </Text>
-      <MFXButton fx:id="signUpBtn" alignment="CENTER" depthLevel="LEVEL0" layoutX="56.0" layoutY="322.0" prefHeight="52.0" prefWidth="158.0" rippleAnimateShadow="true" rippleColor="#bdbdbd12" styleClass="btn_sign_out" stylesheets="@../banking_system.css" text="SIGN UP" textFill="WHITE">
+      <MFXButton fx:id="signUpBtn" alignment="CENTER" depthLevel="LEVEL0" layoutX="56.0" layoutY="322.0" prefHeight="52.0" prefWidth="158.0" rippleAnimateShadow="true" rippleColor="#bdbdbd12" styleClass="btn_sign_out" stylesheets="@banking_system.css" text="SIGN UP" textFill="WHITE">
          <font>
             <Font name="Segoe UI Semibold" size="15.0" />
          </font>

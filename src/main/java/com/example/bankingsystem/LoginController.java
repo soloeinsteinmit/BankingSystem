@@ -1,7 +1,8 @@
-package com.example.bankingsystem.Login_SignUp_Classes;
+package com.example.bankingsystem;
 
 
 import com.example.bankingsystem.DatabaseConnectionUtils.DatabaseConnection;
+import com.example.bankingsystem.OtherClasses.WindowManagement;
 import com.jfoenix.controls.JFXDialog;
 import com.jfoenix.controls.events.JFXDialogEvent;
 import io.github.palexdev.materialfx.controls.MFXButton;
@@ -18,6 +19,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.effect.BoxBlur;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
@@ -46,7 +48,9 @@ public class LoginController implements Initializable {
     private MFXButton changePasswordBtn;
 
     @FXML
-    public static ImageView close_white_signUp;
+    public MFXButton close_white_signUp;
+    @FXML
+    public MFXButton minimizeBtn;
 
     @FXML
     private VBox createAccount_vBox;
@@ -80,8 +84,12 @@ public class LoginController implements Initializable {
     private VBox signIn_vBox;
 
     @FXML
+    private Pane movablePane;
+
+    @FXML
     private VBox vBox;
 
+    public static Pane movePane;
     public static VBox container;
     public static VBox container_iBank;
     public static VBox panel;
@@ -97,6 +105,9 @@ public class LoginController implements Initializable {
     public static MFXPasswordField fgPassNew;
     public static MFXPasswordField fgPassNewRe;
 
+    public static MFXButton closeBtn;
+    public static MFXButton minimizeButton;
+
     private static Parent fxml;
 
 
@@ -104,6 +115,9 @@ public class LoginController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         logInAccount();
 
+        movePane = movablePane;
+        closeBtn = close_white_signUp;
+        minimizeButton = minimizeBtn;
         fgEmail = fg_emailTextField;
         fgPassNew = fg_passwordTextField_new;
         fgPassNewRe = fg_passwordTextField_newReEnter;
@@ -121,6 +135,12 @@ public class LoginController implements Initializable {
         container = createAccount_vBox;
         container_iBank = signIn_vBox;
         panel = vBox;
+
+        closeBtn.setOnAction(WindowManagement::closeWindow);
+
+        minimizeButton.setOnAction(WindowManagement::minimizeWindow);
+
+        WindowManagement.movablePane(movePane);
 
     }
 

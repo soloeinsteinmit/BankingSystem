@@ -1,4 +1,4 @@
-package com.example.bankingsystem.Login_SignUp_Classes;
+package com.example.bankingsystem;
 
 import io.github.palexdev.materialfx.controls.MFXButton;
 import javafx.fxml.FXML;
