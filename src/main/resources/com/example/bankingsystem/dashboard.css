@@ -231,10 +231,11 @@
 .mfx-progress-spinner .percentage {
 	-fx-font-family: 'Comfortaa';
 	-fx-font-weight: bold;
-	-fx-font-smoothing-type: #FFFFFF;
+	-fx-font-smoothing-type: gray;
 	-fx-text-fill: #FFFFFF;
 }
 
 .mfx-progress-spinner:determinate .percentage {
 	-fx-fill: #FFFFFF;
 }
+

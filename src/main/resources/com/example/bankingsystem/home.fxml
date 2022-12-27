@@ -290,7 +290,7 @@
          </children></Pane>
       <Pane layoutX="372.0" layoutY="197.0" prefHeight="90.0" prefWidth="116.0" style="-fx-background-color: #172242; -fx-background-radius: 15;">
          <children>
-            <MFXProgressSpinner layoutX="17.0" layoutY="7.0" prefHeight="76.0" prefWidth="83.0" progress="0.68" />
+            <MFXProgressSpinner layoutX="17.0" layoutY="7.0" prefHeight="76.0" prefWidth="83.0" progress="0.74" stylesheets="@dashboard.css" />
          </children>
       </Pane>
       <Text fill="WHITE" layoutX="14.0" layoutY="66.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Overview">

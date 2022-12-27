@@ -8,6 +8,7 @@ import com.jfoenix.controls.events.JFXDialogEvent;
 import io.github.palexdev.materialfx.controls.MFXButton;
 import io.github.palexdev.materialfx.controls.MFXPasswordField;
 import io.github.palexdev.materialfx.controls.MFXTextField;
+import io.github.palexdev.materialfx.dialogs.MFXGenericDialog;
 import javafx.animation.FadeTransition;
 import javafx.animation.Interpolator;
 import javafx.animation.TranslateTransition;
@@ -79,15 +80,14 @@ public class LoginController implements Initializable {
     public AnchorPane anchorBlur;
     @FXML
     public AnchorPane dialogAnchor;
-
     @FXML
     private VBox signIn_vBox;
-
     @FXML
     private Pane movablePane;
-
     @FXML
     private VBox vBox;
+    @FXML
+    private MFXGenericDialog mfxGenericDialog;
 
     public static Pane movePane;
     public static VBox container;

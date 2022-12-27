@@ -5,6 +5,7 @@ module com.example.bankingsystem {
     requires javafx.graphics;
     requires MaterialFX;
     requires TrayTester;
+    requires GNAvatarView;
 
     requires org.controlsfx.controls;
     requires java.sql;
