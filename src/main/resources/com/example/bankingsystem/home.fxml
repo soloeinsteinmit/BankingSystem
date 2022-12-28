@@ -1,13 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import io.github.palexdev.materialfx.controls.*?>
-<?import javafx.geometry.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.shape.*?>
-<?import javafx.scene.text.*?>
+<?import io.github.palexdev.materialfx.controls.MFXButton?>
+<?import io.github.palexdev.materialfx.controls.MFXProgressSpinner?>
+<?import io.github.palexdev.materialfx.controls.MFXTextField?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
 <AnchorPane prefHeight="643.0" prefWidth="772.0" style="-fx-background-color: #0E172A; -fx-background-radius: 0 40 40 0;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.bankingsystem.HomeController">
    <children>
@@ -180,9 +185,9 @@
                   <Font name="Rockwell" size="25.0" />
                </font>
             </Label>
-            <Label layoutX="40.0" layoutY="169.0" prefHeight="33.0" prefWidth="149.0" text="12545.720" textFill="WHITE" wrapText="true">
+            <Label layoutX="40.0" layoutY="171.0" prefHeight="33.0" prefWidth="149.0" text="12545.720" textFill="WHITE" wrapText="true">
                <font>
-                  <Font name="Rockwell" size="25.0" />
+                  <Font name="Yu Gothic Medium" size="25.0" />
                </font>
             </Label>
             <Label fx:id="abbr_name" layoutX="25.0" layoutY="236.0" prefHeight="30.0" prefWidth="118.0" text="S Eshun" textFill="WHITE" wrapText="true">
@@ -195,9 +200,9 @@
                   <Font name="Comfortaa Bold" size="12.0" />
                </font>
             </Label>
-            <Label layoutX="22.0" layoutY="203.0" prefHeight="30.0" prefWidth="166.0" text="1234 4321 4987 1234" textFill="WHITE" wrapText="true">
+            <Label alignment="CENTER" layoutX="22.0" layoutY="203.0" prefHeight="30.0" prefWidth="166.0" text="1234 4321 4987 1234" textFill="WHITE" wrapText="true">
                <font>
-                  <Font name="OCR A Extended" size="14.0" />
+                  <Font name="Yu Gothic Regular" size="14.0" />
                </font>
             </Label>
          </children>
@@ -219,9 +224,9 @@
                   <Font name="Rockwell" size="24.0" />
                </font>
             </Label>
-            <Label layoutX="34.0" layoutY="31.0" prefHeight="33.0" prefWidth="149.0" text="56.90" textFill="WHITE" wrapText="true">
+            <Label layoutX="34.0" layoutY="34.0" prefHeight="33.0" prefWidth="149.0" text="56.90" textFill="WHITE" wrapText="true">
                <font>
-                  <Font name="Rockwell" size="24.0" />
+                  <Font name="Yu Gothic Medium" size="27.0" />
                </font>
             </Label>
             <Text fill="WHITE" layoutX="14.0" layoutY="101.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Outcome">
@@ -234,9 +239,9 @@
                   <Font name="Rockwell" size="24.0" />
                </font>
             </Label>
-            <Label layoutX="34.0" layoutY="105.0" prefHeight="33.0" prefWidth="149.0" text="12545.720" textFill="WHITE" wrapText="true">
+            <Label layoutX="34.0" layoutY="109.0" prefHeight="33.0" prefWidth="149.0" text="12545.720" textFill="WHITE" wrapText="true">
                <font>
-                  <Font name="Rockwell" size="24.0" />
+                  <Font name="Yu Gothic Medium" size="27.0" />
                </font>
             </Label>
             <Text fill="WHITE" layoutX="43.0" layoutY="183.0" opacity="0.84" strokeType="OUTSIDE" strokeWidth="0.0" text="Month of">
@@ -284,7 +289,7 @@
             </Text>
             <Label layoutX="9.0" layoutY="39.0" prefHeight="33.0" prefWidth="30.0" text="28" textFill="WHITE" wrapText="true">
                <font>
-                  <Font name="Rockwell" size="27.0" />
+                  <Font name="Yu Gothic Medium" size="27.0" />
                </font>
             </Label>
          </children></Pane>

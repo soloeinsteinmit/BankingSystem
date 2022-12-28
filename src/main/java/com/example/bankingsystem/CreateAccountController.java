@@ -1,6 +1,7 @@
 package com.example.bankingsystem;
 
 import com.example.bankingsystem.DatabaseConnectionUtils.DatabaseConnection;
+import com.example.bankingsystem.DatabaseConnectionUtils.UserCredentialsDbConnection;
 import io.github.palexdev.materialfx.controls.MFXButton;
 import io.github.palexdev.materialfx.controls.MFXPasswordField;
 import io.github.palexdev.materialfx.controls.MFXTextField;
@@ -94,8 +95,7 @@ public class CreateAccountController implements Initializable {
             else{
 
                 try {
-                    FXMLLoader loader = new FXMLLoader(getClass().getResource("dashboard.fxml"));
-
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("user_credentials.fxml"));
                     root = loader.load();
 
                     DatabaseConnection.signUpUser(name_textField_signIn.getText(),
@@ -106,12 +106,24 @@ public class CreateAccountController implements Initializable {
 
                     if (SignInIBankAccountTextController.validateEmail(email_textField_signIn.getText()) && !isFound){
 
-                        HomeController.str_userName = name_textField_signIn.getText();
+                        UserCredentialsController getText = loader.getController();
+                        getText.setTextField(email_textField_signIn, name_textField_signIn, account_id_textField_signIn);
+
+                        UserCredentialsDbConnection.account_id = account_id_textField_signIn.getText();
+                        System.out.println("acc id createAcc = " + UserCredentialsDbConnection.account_id);
+
+                        /*HomeController.str_userName = name_textField_signIn.getText();
                         HomeController.str_email = email_textField_signIn.getText();
                         HomeController.str_password = password_textField_signIn.getText();
                         HomeController.str_accId = account_id_textField_signIn.getText();
 
-                        HomeController.setUserCredentials();
+                        String[] splitName = name_textField_signIn.getText().split(" ");
+                        String[] firstName = splitName[0].split("");
+                        // gotten abbr name
+                        HomeController.str_abbrName = firstName[0] + " " + splitName[splitName.length-1];
+                        System.out.println(HomeController.str_abbrName);
+
+                        HomeController.setUserCredentials();*/
 
                         stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
                         scene = new Scene(root);

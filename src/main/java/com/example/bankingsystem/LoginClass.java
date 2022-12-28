@@ -17,7 +17,9 @@ public class LoginClass extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(LoginClass.class.getResource("Login.fxml"));
+//        FXMLLoader fxmlLoader = new FXMLLoader(LoginClass.class.getResource("user_credentials.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 830, 645);
+//        Scene scene = new Scene(fxmlLoader.load(), 1216, 645);
 
         stage.initStyle(StageStyle.UNDECORATED);
         my_stage = stage;

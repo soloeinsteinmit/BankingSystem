@@ -12,8 +12,7 @@ import java.util.Date;
 public class DatabaseConnection {
 
     public static boolean gmailIsFound;
-    public static void signUpUser(String userFullName, String email, String user_password,
-                                  String user_account_id){
+    public static void signUpUser(String userFullName, String email, String user_password, String user_account_id){
         Connection connection = null;
         PreparedStatement psInsert = null;
         PreparedStatement psCheckUserExist = null;
@@ -23,8 +22,10 @@ public class DatabaseConnection {
         try{
             connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/banking_system_db", "root",
                     "programming");
-            psCheckUserExist = connection.prepareStatement("SELECT user_email FROM user_signup_table \n" +
-                                                            "WHERE user_email = ?");
+            psCheckUserExist = connection.prepareStatement("""
+                    SELECT email_address\s
+                    FROM user_details
+                    WHERE email_address = ?""");
             psCheckUserExist.setString(1, email);
             resultSet = psCheckUserExist.executeQuery();
 
@@ -37,18 +38,16 @@ public class DatabaseConnection {
 
             } else {
                 gmailIsFound = false;
-                psInsert = connection.prepareStatement("INSERT INTO user_signup_table(user_full_name, user_email, " +
-                        "user_password, date_registered, account_id)\n" +
-                        "VALUES(?, ?, ?, ?, ?)");
+                psInsert = connection.prepareStatement("INSERT INTO user_details VALUES(?, ?, ?, ?, NULL, NULL, NULL, NULL, ?, NULL)");
 
                 Date date = new Date();
                 SimpleDateFormat dateFormat = new SimpleDateFormat("Y-MM-dd");
 
-                psInsert.setString(1, userFullName);
-                psInsert.setString(2, email);
-                psInsert.setString(3, user_password);
-                psInsert.setString(4, dateFormat.format(date));
-                psInsert.setString(5, user_account_id);
+                psInsert.setInt(1, Integer.parseInt(user_account_id));
+                psInsert.setString(2, userFullName);
+                psInsert.setString(3, email);
+                psInsert.setString(4, user_password);
+                psInsert.setString(5, dateFormat.format(date));
                 psInsert.executeUpdate();
 
             }
@@ -105,14 +104,11 @@ public class DatabaseConnection {
             connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/banking_system_db", "root",
                     "programming");
             psCheckUserExist = connection.prepareStatement("""
-                    SELECT user_signup_table.user_email,\s
-                    \tuser_signup_table.account_id,\s
-                    \tuser_signup_table.user_password,
-                        user_signup_table.user_full_name
-                    FROM user_signup_table\s
-                    WHERE  user_email = ? AND account_id = ? AND user_password = ?""");
-            psCheckUserExist.setString(1, email);
-            psCheckUserExist.setString(2, id_account);
+                    SELECT account_id, full_name, email_address, user_password
+                    FROM user_details
+                    WHERE account_id = ? AND email_address = ? AND user_password = ?""");
+            psCheckUserExist.setInt(1, Integer.parseInt(id_account));
+            psCheckUserExist.setString(2, email);
             psCheckUserExist.setString(3, password);
             resultSet = psCheckUserExist.executeQuery();
             if (!resultSet.isBeforeFirst()){
@@ -123,10 +119,12 @@ public class DatabaseConnection {
                 alert.show();
             }else {
                 while (resultSet.next()){
-                    String retrievedEmail = resultSet.getString("user_email");
-                    String retrievedAccountId = resultSet.getString("account_id");
+                    String retrievedEmail = resultSet.getString("email_address");
+                    int retrievedAccountId1 = resultSet.getInt("account_id");
                     String retrievedPassword = resultSet.getString("user_password");
-                    String retrievedUserName = resultSet.getString("user_full_name");
+                    String retrievedUserName = resultSet.getString("full_name");
+
+                    String retrievedAccountId  = String.valueOf(retrievedAccountId1);
 
                     if (retrievedEmail.equals(email) && retrievedAccountId.equals(id_account) &&
                             retrievedPassword.equals(password)){
@@ -193,9 +191,9 @@ public class DatabaseConnection {
                     "programming");
 
             psCheckEmailExist = connection.prepareStatement("""
-                    SELECT user_signup_table.user_email, user_signup_table.user_password
-                    FROM user_signup_table
-                    WHERE user_email = ?""");
+                    SELECT email_address, user_password
+                    FROM user_details
+                    WHERE email_address = ?""");
 
             psCheckEmailExist.setString(1, email);
             resultSet = psCheckEmailExist.executeQuery();
@@ -209,9 +207,9 @@ public class DatabaseConnection {
                 while (resultSet.next()){
                     isFound = true;
                     psInsertNewPassword = connection.prepareStatement("""
-                            UPDATE user_signup_table
-                            SET user_signup_table.user_password = ?\s
-                            WHERE user_email = ?""");
+                            UPDATE user_details
+                            SET user_password = ?
+                            WHERE email_address = ?""");
                     psInsertNewPassword.setString(1, password);
                     psInsertNewPassword.setString(2, email);
                     psInsertNewPassword.executeUpdate();

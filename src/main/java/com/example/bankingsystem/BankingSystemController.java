@@ -7,18 +7,14 @@ import io.github.palexdev.materialfx.controls.MFXTextField;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.DragEvent;
 import javafx.scene.input.TransferMode;
+import javafx.scene.text.Text;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
-import java.util.List;
 import java.util.ResourceBundle;
 
 /**
@@ -55,15 +51,14 @@ public class BankingSystemController implements Initializable {
 
     @FXML
     private Label retrievedName;
-
-    private static FileInputStream fis;
-    private static File f;
+    @FXML
+    private Text text;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
         try {
-            TestImageDBConnection.getImageIntoDbFileChooser(addImage, nameTextfield.getText(), receiveImage, otherImgView);
+            TestImageDBConnection.getImageIntoDbFileChooser(addImage, receiveImage, otherImgView);
         } catch (SQLException | IOException e) {
             throw new RuntimeException(e);
         }
@@ -77,6 +72,20 @@ public class BankingSystemController implements Initializable {
                 throw new RuntimeException(ex);
             }
         });
+
+        addImaggeBtn.setOnAction(e -> {
+            try {
+
+                TestImageDBConnection.insertName(nameTextfield.getText());
+                System.out.println(nameTextfield.getText() + " name");
+                nameTextfield.clear();
+
+            } catch (SQLException ex) {
+                throw new RuntimeException(ex);
+            }
+            text.setText("There is a text here hurray");
+        });
+
 
 
     }
@@ -92,20 +101,20 @@ public class BankingSystemController implements Initializable {
 
 
     @FXML
-    private void handleOnDrop(DragEvent event) throws FileNotFoundException {
+    private void handleOnDrop(DragEvent event) throws IOException, SQLException {
+        /*
         List<File> files = event.getDragboard().getFiles();
 
 
         File file = new File(String.valueOf(files.get(0)));
-        System.out.println("file = " + file);
         FileInputStream fileInputStream = new FileInputStream(file);
-        f = file;
-        System.out.println("f = " + f);
-        fis = fileInputStream;
+
         System.out.println(fileInputStream);
 
         Image image = new Image(fileInputStream);
         receiveImage.setImage(image);
+        */
+        TestImageDBConnection.getImageIntoDbDragEffect(event, receiveImage);
     }
 
     @FXML
