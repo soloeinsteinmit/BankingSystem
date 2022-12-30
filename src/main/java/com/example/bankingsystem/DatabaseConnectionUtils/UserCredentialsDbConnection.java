@@ -1,6 +1,6 @@
 package com.example.bankingsystem.DatabaseConnectionUtils;
 
-import com.example.bankingsystem.BankingSystemApplication;
+import com.example.bankingsystem.LoginClass;
 import io.github.gleidson28.GNAvatarView;
 import io.github.palexdev.materialfx.controls.MFXTextField;
 import javafx.scene.control.Alert;
@@ -62,7 +62,7 @@ public class UserCredentialsDbConnection {
         PreparedStatement finalPsInsert = psInsert;
         imageView.setOnMouseClicked(event -> {
             FileChooser fileChooser = new FileChooser();
-            File file = fileChooser.showOpenDialog(BankingSystemApplication.stg);
+            File file = fileChooser.showOpenDialog(LoginClass.my_stage);
             fileMain = file;
             System.out.println("fileMain fileChooser = " + fileMain);
             System.out.println("fileChooser =  " + file);

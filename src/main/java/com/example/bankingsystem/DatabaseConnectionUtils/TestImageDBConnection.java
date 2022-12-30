@@ -1,6 +1,6 @@
 package com.example.bankingsystem.DatabaseConnectionUtils;
 
-import com.example.bankingsystem.BankingSystemApplication;
+import com.example.bankingsystem.LoginClass;
 import io.github.gleidson28.GNAvatarView;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
@@ -56,7 +56,7 @@ public class TestImageDBConnection {
             PreparedStatement finalPsInsert = psInsert;
             imageView.setOnMouseClicked(event -> {
                 FileChooser fileChooser = new FileChooser();
-                File file = fileChooser.showOpenDialog(BankingSystemApplication.stg);
+                File file = fileChooser.showOpenDialog(LoginClass.my_stage);
                 System.out.println("fileChooser =  " + file);
                 try {
                     FileInputStream fileInputStream = new FileInputStream(file);
