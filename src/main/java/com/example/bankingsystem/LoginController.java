@@ -2,6 +2,7 @@ package com.example.bankingsystem;
 
 
 import com.example.bankingsystem.DatabaseConnectionUtils.DatabaseConnection;
+import com.example.bankingsystem.OtherClasses.OtherCode;
 import com.example.bankingsystem.OtherClasses.WindowManagement;
 import com.jfoenix.controls.JFXDialog;
 import com.jfoenix.controls.events.JFXDialogEvent;
@@ -351,7 +352,7 @@ public class LoginController implements Initializable {
         });
 
         changePasswordButton.setOnAction(event -> {
-            if (SignInIBankAccountTextController.validateEmail(fgEmail.getText()) &&
+            if (OtherCode.validateEmail(fgEmail.getText()) &&
                     fgPassNew.getText().equals(fgPassNewRe.getText())){
                 DatabaseConnection.forgotPassword(fgEmail.getText(), fgPassNew.getText());
                 if (isFoundDialog){

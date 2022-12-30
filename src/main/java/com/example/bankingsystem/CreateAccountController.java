@@ -1,7 +1,7 @@
 package com.example.bankingsystem;
 
-import com.example.bankingsystem.DatabaseConnectionUtils.DatabaseConnection;
 import com.example.bankingsystem.DatabaseConnectionUtils.UserCredentialsDbConnection;
+import com.example.bankingsystem.OtherClasses.OtherCode;
 import io.github.palexdev.materialfx.controls.MFXButton;
 import io.github.palexdev.materialfx.controls.MFXPasswordField;
 import io.github.palexdev.materialfx.controls.MFXTextField;
@@ -98,19 +98,22 @@ public class CreateAccountController implements Initializable {
                     FXMLLoader loader = new FXMLLoader(getClass().getResource("user_credentials.fxml"));
                     root = loader.load();
 
-                    DatabaseConnection.signUpUser(name_textField_signIn.getText(),
+                    /*DatabaseConnection.signUpUser(name_textField_signIn.getText(),
                             email_textField_signIn.getText(), password_textField_signIn.getText(),
-                            account_id_textField_signIn.getText());
+                            account_id_textField_signIn.getText());*/
 
                     System.out.println("IS FOUND UP "+ isFound);
 
-                    if (SignInIBankAccountTextController.validateEmail(email_textField_signIn.getText()) && !isFound){
+                    if (OtherCode.validateEmail(email_textField_signIn.getText()) && !isFound){
 
                         UserCredentialsController getText = loader.getController();
                         getText.setTextField(email_textField_signIn, name_textField_signIn, account_id_textField_signIn);
 
                         UserCredentialsDbConnection.account_id = account_id_textField_signIn.getText();
                         System.out.println("acc id createAcc = " + UserCredentialsDbConnection.account_id);
+                        UserCredentialsDbConnection.password = password_textField_signIn.getText();
+                        System.out.println("password = " + UserCredentialsDbConnection.password);
+
 
                         /*HomeController.str_userName = name_textField_signIn.getText();
                         HomeController.str_email = email_textField_signIn.getText();

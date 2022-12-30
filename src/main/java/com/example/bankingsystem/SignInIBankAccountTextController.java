@@ -1,6 +1,7 @@
 package com.example.bankingsystem;
 
 import com.example.bankingsystem.DatabaseConnectionUtils.DatabaseConnection;
+import com.example.bankingsystem.OtherClasses.OtherCode;
 import io.github.palexdev.materialfx.controls.MFXButton;
 import io.github.palexdev.materialfx.controls.MFXPasswordField;
 import io.github.palexdev.materialfx.controls.MFXTextField;
@@ -24,8 +25,6 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.Arrays;
 import java.util.ResourceBundle;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class SignInIBankAccountTextController implements Initializable {
 
@@ -99,7 +98,7 @@ public class SignInIBankAccountTextController implements Initializable {
                     DatabaseConnection.signInUser(email_textField_signUp.getText(), acc_id_textField_signUp.getText(),
                             password_textField_signUp.getText());
 
-                    if (isEqualController && validateEmail(getEmailText.getText())){
+                    if (isEqualController && OtherCode.validateEmail(getEmailText.getText())){
 
                         HomeController.str_userName = userName;
                         HomeController.str_email = email_textField_signUp.getText();
@@ -146,37 +145,5 @@ public class SignInIBankAccountTextController implements Initializable {
         });
     }
 
-     public static boolean validateEmail(String emailText){
-        Pattern pattern = Pattern.compile("[a-zA-Z0-9][a-zA-Z0-9._]*@[a-zA-Z0-9]+([.][a-zA-Z]+)+");
-        Matcher matcher = pattern.matcher(emailText);
-        if (matcher.find() && matcher.group().equals(emailText)){
-            return true;
-        } else {
 
-            String title = "Email Validation Error";
-            String message = "Please enter a valid email";
-            TrayNotification tray = new TrayNotification();
-            AnimationType type = AnimationType.POPUP;
-
-            tray.setAnimationType(type);
-            tray.setTitle(title);
-            tray.setMessage(message);
-            tray.setNotificationType(NotificationType.ERROR);
-            tray.showAndDismiss(Duration.millis(3000));
-
-            Alert alert = new Alert(Alert.AlertType.WARNING);
-            alert.setTitle("Validate Email");
-            alert.setHeaderText(null);
-            alert.setContentText("Please enter a valid email");
-            alert.showAndWait();
-            return false;
-
-
-
-        //final Tooltip tooltipFullScreen = new Tooltip();
-        //tooltipFullScreen.setText("Press to toggle full screen. Press Esc to exit full screen");
-        //tooltipFullScreen.setShowDelay(Duration.seconds(1));
-        //fullScreen.setTooltip(tooltipFullScreen);
-        }
-    }
 }

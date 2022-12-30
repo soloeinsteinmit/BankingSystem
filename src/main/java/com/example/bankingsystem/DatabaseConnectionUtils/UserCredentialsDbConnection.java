@@ -13,9 +13,14 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.sql.*;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 public class UserCredentialsDbConnection {
+    public static File fileMain;
+    public static String account_id;
+    public static String password;
 
     public static void getImageIntoDbDragEffect(DragEvent event,
                         GNAvatarView avatarView) throws SQLException, IOException {
@@ -30,6 +35,8 @@ public class UserCredentialsDbConnection {
         List<File> files = event.getDragboard().getFiles();
 
         File file = new File(String.valueOf(files.get(0)));
+        fileMain = file;
+        System.out.println("fileMain drag = " + fileMain);
         System.out.println("dragEffect file =  " + file);
         FileInputStream fileInputStream = new FileInputStream(file);
 
@@ -56,6 +63,8 @@ public class UserCredentialsDbConnection {
         imageView.setOnMouseClicked(event -> {
             FileChooser fileChooser = new FileChooser();
             File file = fileChooser.showOpenDialog(BankingSystemApplication.stg);
+            fileMain = file;
+            System.out.println("fileMain fileChooser = " + fileMain);
             System.out.println("fileChooser =  " + file);
             try {
                 FileInputStream fileInputStream = new FileInputStream(file);
@@ -76,10 +85,6 @@ public class UserCredentialsDbConnection {
             }
         });
 
-
-    }
-
-    public static void userAccountDetails(){
 
     }
 
@@ -104,7 +109,7 @@ public class UserCredentialsDbConnection {
             alert.setContentText("PLEASE CONTACT ACCOUNT ID IS NOT REGISTERED");
             alert.show();
         }else {
-            psInsert = connection.prepareStatement("INSERT INTO contacts_table VALUES(?, ?, ?, ?, ?, 29050)");
+            psInsert = connection.prepareStatement("INSERT INTO contacts_table VALUES(?, ?, ?, ?, ?, " + Integer.parseInt(account_id) + ")");
             psInsert.setInt(1, Integer.parseInt(contact_acc_id.getText()));
             psInsert.setString(2, name.getText());
             psInsert.setString(3, email.getText());
@@ -114,60 +119,115 @@ public class UserCredentialsDbConnection {
         }
     }
 
-    public static String account_id;
 
-    public static void addEmail(MFXTextField email) throws SQLException {
+
+    public static void userDetails(MFXTextField name, MFXTextField email, MFXTextField visa_num, String dob,
+            String gender, String freeTransfer) throws SQLException, IOException {
         Connection connection;
         PreparedStatement psInsert;
 
         connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/banking_system_db", "root",
                 "programming");
+        psInsert = connection.prepareStatement("INSERT INTO user_details VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
 
-        psInsert = connection.prepareStatement("UPDATE user_details SET email_address = ? WHERE account_id = " + account_id);
-        psInsert.setString(3, email.getText());
-        psInsert.executeUpdate();
-        System.out.println("add email");
-    }
+        java.util.Date date = new Date();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("Y-MM-dd");
 
-
-    public static void addFullName(MFXTextField name) throws SQLException {
-        Connection connection;
-        PreparedStatement psInsert;
-
-        connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/banking_system_db", "root",
-                "programming");
-
-        psInsert = connection.prepareStatement("UPDATE user_details SET full_name = ? WHERE account_id = " + account_id);
+        psInsert.setInt(1, Integer.parseInt(account_id));
         psInsert.setString(2, name.getText());
-        psInsert.executeUpdate();
-        System.out.println("add name");
-    }
-
-    public static void addAccId(MFXTextField acc_id) throws SQLException {
-        Connection connection;
-        PreparedStatement psInsert;
-
-        connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/banking_system_db", "root",
-                "programming");
-
-        psInsert = connection.prepareStatement("UPDATE user_details SET full_name = ? WHERE account_id = " + account_id);
-        psInsert.setInt(1, Integer.parseInt(acc_id.getText()));
-        psInsert.executeUpdate();
-        System.out.println("add acc id");
-    }
-
-    public static void addVisaAccNum(MFXTextField visa_num) throws SQLException {
-        Connection connection;
-        PreparedStatement psInsert;
-
-        connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/banking_system_db", "root",
-                "programming");
-
-        psInsert = connection.prepareStatement("UPDATE user_details SET full_name = ? WHERE account_id = " + account_id);
+        psInsert.setString(3, email.getText());
+        psInsert.setString(4, password);
         psInsert.setString(5, visa_num.getText());
-        psInsert.executeUpdate();
+        psInsert.setString(6, dob);
+        psInsert.setString(7, gender);
 
-        System.out.println("add visa");
+        FileInputStream fileInputStream = new FileInputStream(fileMain);
+        System.out.println("userDetails fileMain = " + fileMain);
+        psInsert.setBinaryStream(8, fileInputStream, fileInputStream.available());  //profile pic
+
+        psInsert.setString(9, dateFormat.format(date));
+        psInsert.setInt(10, Integer.parseInt(freeTransfer));
+        psInsert.execute();
+    }
+
+    public static void getEmail(MFXTextField email, MFXTextField getAccId) throws SQLException {
+        Connection connection;
+        PreparedStatement psInsert;
+        ResultSet resultSet;
+
+        connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/banking_system_db", "root",
+                "programming");
+
+        psInsert = connection.prepareStatement("SELECT email_address FROM user_details WHERE account_id = ?");
+        psInsert.setInt(1, Integer.parseInt(getAccId.getText()));
+        resultSet = psInsert.executeQuery();
+
+        if (!resultSet.isBeforeFirst()){
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setContentText("PLEASE CONTACT ACCOUNT ID IS NOT REGISTERED");
+            alert.show();
+        }else{
+            while(resultSet.next()){
+                String email_address = resultSet.getString("email_address");
+                email.setText(email_address);
+                System.out.println("result set" +  email_address);
+            }
+        }
+
+    }
+
+    public static void getName(MFXTextField name, MFXTextField getAccId) throws SQLException {
+        Connection connection;
+        PreparedStatement psInsert;
+        ResultSet resultSet;
+
+        connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/banking_system_db", "root",
+                "programming");
+
+        psInsert = connection.prepareStatement("SELECT full_name FROM user_details WHERE account_id = ?");
+        psInsert.setInt(1, Integer.parseInt(getAccId.getText()));
+        resultSet = psInsert.executeQuery();
+
+        if (!resultSet.isBeforeFirst()){
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setContentText("PLEASE CONTACT ACCOUNT ID IS NOT REGISTERED");
+            alert.show();
+        }else{
+            while(resultSet.next()){
+                String fullName = resultSet.getString("full_name");
+                name.setText(fullName);
+                System.out.println("result set" +  fullName);
+            }
+        }
+
+
+
+    }
+
+    public static void getVisaNum(MFXTextField visaNum, MFXTextField getAccId) throws SQLException {
+        Connection connection;
+        PreparedStatement psInsert;
+        ResultSet resultSet;
+
+        connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/banking_system_db", "root",
+                "programming");
+
+        psInsert = connection.prepareStatement("SELECT visa_account_num FROM user_details WHERE account_id = ?");
+        psInsert.setInt(1, Integer.parseInt(getAccId.getText()));
+        resultSet = psInsert.executeQuery();
+
+        if (!resultSet.isBeforeFirst()){
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setContentText("PLEASE CONTACT ACCOUNT ID IS NOT REGISTERED");
+            alert.show();
+        }else{
+            while(resultSet.next()){
+                String visaAccountNum = resultSet.getString("visa_account_num");
+                visaNum.setText(visaAccountNum);
+                System.out.println("result set" +  visaAccountNum);
+            }
+        }
+
     }
 
 }

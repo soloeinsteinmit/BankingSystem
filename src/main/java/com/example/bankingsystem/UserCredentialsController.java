@@ -1,11 +1,16 @@
 package com.example.bankingsystem;
 
 import com.example.bankingsystem.DatabaseConnectionUtils.UserCredentialsDbConnection;
+import com.example.bankingsystem.OtherClasses.OtherCode;
 import com.example.bankingsystem.OtherClasses.WindowManagement;
 import io.github.gleidson28.GNAvatarView;
 import io.github.palexdev.materialfx.controls.*;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.ToggleGroup;
@@ -13,10 +18,14 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.DragEvent;
 import javafx.scene.input.TransferMode;
 import javafx.scene.layout.Pane;
+import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class UserCredentialsController implements Initializable {
@@ -86,6 +95,8 @@ public class UserCredentialsController implements Initializable {
 
     @FXML
     private MFXTextField user_full_name;
+    @FXML
+    private MFXTextField freeTransfer;
 
     @FXML
     private ToggleGroup user_gender;
@@ -104,6 +115,14 @@ public class UserCredentialsController implements Initializable {
 
     @FXML
     private MFXTextField user_visa_num;
+    @FXML
+    private Label getEmailDb;
+
+    @FXML
+    private Label getNameDb;
+
+    @FXML
+    private Label getVisaNumDb;
 
     public static MFXButton close;
     public static MFXButton minimize;
@@ -111,6 +130,7 @@ public class UserCredentialsController implements Initializable {
     public static GNAvatarView user_prof;
     public static ImageView user_addImg;
     public static MFXButton addContact;
+    public static MFXButton logInBtn;
     public static MFXButton registerUserBtn;
     public static MFXTextField contactEmail;
     public static MFXTextField contactName;
@@ -120,19 +140,31 @@ public class UserCredentialsController implements Initializable {
     public static MFXTextField uName;
     public static MFXTextField uAccId;
     public static MFXTextField uVisaNum;
+    public static MFXTextField fTransfer;
     public static MFXRadioButton contactMale;
     public static MFXRadioButton contactFemale;
+    public static MFXRadioButton userFemale;
+    public static MFXRadioButton userMale;
     public static MFXCheckbox editName;
     public static MFXCheckbox editEmail;
+    public static MFXDatePicker dob;
+    public static String date;
+    public static Label userName;
+    public static Label get_name_db;
+    public static Label get_email_db;
+    public static Label get_visa_num_db;
+    private static Parent root;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        registerUserBtn = registerBtn;
+        registerUserBtn = registerBtn;      dob = dobField;
         contactEmail = contact_email;       contactName = contact_fullName;
         contactAccId = contact_acc_id;      contactVisaNum = contact_visa_num;
+        fTransfer = freeTransfer;           userName = user_name;
 
         //initializing radio buttons contact
         contactMale = contact_radioBtn_male;        contactFemale = contact_radioBtn_female;
+        userMale = user_radioBtn_male;              userFemale = user_radioBtn_female;
 
         //initializing user textFields
         uEmail = user_email_address;        uName = user_full_name;         uAccId = user_acc_id;
@@ -144,7 +176,13 @@ public class UserCredentialsController implements Initializable {
         editEmail = editEmailCheckBox;
         editEmail.setOnAction(actionEvent -> uEmail.setAllowEdit(editEmail.isSelected()));
 
+        // buttons
         addContact = addContactBtn;         user_addImg = user_addImage;        user_prof = user_profile;
+        logInBtn = loginBtn;
+
+        // get data from db labels
+        get_email_db = getEmailDb;         get_name_db = getNameDb;      get_visa_num_db = getVisaNumDb;
+        getAndSetEmail();                  getAndSetName();              getAndSetVisaNum();
 
         try {
             UserCredentialsDbConnection.getImageIntoDbFileChooser(user_addImg, user_prof);
@@ -152,39 +190,24 @@ public class UserCredentialsController implements Initializable {
             throw new RuntimeException(e);
         }
 
-        addContact.setOnAction(actionEvent -> {
-            try {
-                if (contactEmail.getText().isBlank() || contactName.getText().isBlank() ||
-                        contactAccId.getText().isBlank() || contactVisaNum.getText().isBlank() ||
-                        SignInIBankAccountTextController.validateEmail(contactEmail.getText())){
-                    Alert alert = new Alert(Alert.AlertType.ERROR);
-                    alert.setContentText("PLEASE FILL IN ALL THE FORMS");
-                    alert.show();
-                }else {
-                    String gender = null;
-                    if (contactMale.isSelected()){
-                        gender = contactMale.getText();
-                    } else if (contactFemale.isSelected()) {
-                        gender = contactFemale.getText();
-                    }
-                    UserCredentialsDbConnection.createContactsDetails(contactEmail, contactName, contactAccId,
-                            contactVisaNum, gender);
-                }
+        // add contact
+        addContact();
 
-            } catch (SQLException e) {
-                throw new RuntimeException(e);
-            }
-            contactEmail.clear();            contactName.clear();
-            contactAccId.clear();            contactVisaNum.clear();
-        });
+        //login button
+        login();
 
         //initializing window management buttons        // window management
         close = close_white_signUp;                     close.setOnAction(WindowManagement::closeWindow);
         minimize = minimizeBtn;                         minimize.setOnAction(WindowManagement::minimizeWindow);
         movablePane = dragAreaPane;                     WindowManagement.movablePane(movablePane);
 
+        // get date
+        getDate();
+
         // register user
         registerUser();
+
+
     }
 
     @FXML
@@ -212,16 +235,57 @@ public class UserCredentialsController implements Initializable {
         uEmail.setText(email.getText());
         uName.setText(name.getText());
         uAccId.setText(accId.getText());
+        userName.setText(name.getText());
     }
 
     private static void registerUser(){
         registerUserBtn.setOnAction(actionEvent -> {
-
             try {
-                UserCredentialsDbConnection.addEmail(uEmail);
-                UserCredentialsDbConnection.addAccId(uAccId);
-                UserCredentialsDbConnection.addFullName(uName);
-                UserCredentialsDbConnection.addVisaAccNum(uVisaNum);
+
+                String gender = null;
+                if (userMale.isSelected()){
+                    gender = userMale.getText();
+                } else if (userFemale.isSelected()) {
+                    gender = userFemale.getText();
+                }
+                UserCredentialsDbConnection.userDetails(uName, uEmail, uVisaNum, date, gender, fTransfer.getText());
+            } catch (SQLException | IOException e) {
+                throw new RuntimeException(e);
+            }
+        });
+    }
+
+    public static void getDate(){
+        dob.setOnAction(actionEvent -> {
+            LocalDate myDate = dob.getValue();
+            date = myDate.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+        });
+
+    }
+
+    public static void addContact(){
+        addContact.setOnAction(actionEvent -> {
+            try {
+                if (contactEmail.getText().isBlank() || contactName.getText().isBlank() ||
+                        contactAccId.getText().isBlank() || contactVisaNum.getText().isBlank() ||
+                            !OtherCode.validateEmail(contactEmail.getText())){
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setContentText("PLEASE FILL IN ALL THE FORMS");
+                    alert.show();
+                }else {
+                    String gender = null;
+                    if (contactMale.isSelected()){
+                        gender = contactMale.getText();
+                    } else if (contactFemale.isSelected()) {
+                        gender = contactFemale.getText();
+                    }
+
+                    UserCredentialsDbConnection.createContactsDetails(contactEmail, contactName, contactAccId,
+                            contactVisaNum, gender);
+                    contactEmail.clear();            contactName.clear();
+                    contactAccId.clear();            contactVisaNum.clear();
+                }
+
             } catch (SQLException e) {
                 throw new RuntimeException(e);
             }
@@ -229,5 +293,66 @@ public class UserCredentialsController implements Initializable {
         });
     }
 
+    public static void login(){
+        logInBtn.setOnMouseClicked(event -> {
+            try {
+                root = FXMLLoader.load(Objects.requireNonNull(LoginController.class.getResource("Login.fxml")));
+
+                Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+                stage.setScene(new Scene(root));
+                stage.show();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        });
+    }
+
+    public static void getAndSetEmail(){
+        get_email_db.setOnMouseClicked(mouseEvent -> {
+            if (contactAccId.getText().isBlank()){
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setContentText("PLEASE FILL IN CONTACT ACC. ID TEXT FIELD TO RETRIEVE CONTACT EMAIL");
+                alert.show();
+            }else {
+                try {
+                    UserCredentialsDbConnection.getEmail(contactEmail, contactAccId);
+                } catch (SQLException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        });
+    }
+
+    public static void getAndSetName(){
+        get_name_db.setOnMouseClicked(mouseEvent -> {
+            if (contactAccId.getText().isBlank()){
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setContentText("PLEASE FILL IN CONTACT ACC. ID TEXT FIELD TO RETRIEVE CONTACT NAME");
+                alert.show();
+            }else {
+                try {
+                    UserCredentialsDbConnection.getName(contactName, contactAccId);
+                } catch (SQLException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        });
+    }
+
+    public static void getAndSetVisaNum(){
+        get_visa_num_db.setOnMouseClicked(mouseEvent -> {
+            if (contactAccId.getText().isBlank()){
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setContentText("PLEASE FILL IN CONTACT ACC. ID TEXT FIELD TO RETRIEVE CONTACT VISA ACCOUNT NUMBER");
+                alert.show();
+            }else {
+                try {
+                    UserCredentialsDbConnection.getVisaNum(contactVisaNum, contactAccId);
+                } catch (SQLException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        });
+    }
 
 }
