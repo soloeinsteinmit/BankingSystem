@@ -6,22 +6,22 @@ import com.example.bankingsystem.SignInIBankAccountTextController;
 import javafx.scene.control.Alert;
 
 import java.sql.*;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
-public class DatabaseConnection {
+public class LoginDbConnection {
+
+    public static final String dbPassword = "imanage";
 
     public static boolean gmailIsFound;
-    public static void signUpUser(String userFullName, String email, String user_password, String user_account_id){
+    public static void signUpUser(String email){
         Connection connection = null;
-        PreparedStatement psInsert = null;
+
         PreparedStatement psCheckUserExist = null;
         ResultSet resultSet = null;
 
 
         try{
             connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/banking_system_db", "root",
-                    "programming");
+                    dbPassword);
             psCheckUserExist = connection.prepareStatement("""
                     SELECT email_address\s
                     FROM user_details
@@ -32,23 +32,6 @@ public class DatabaseConnection {
 
             if (resultSet.isBeforeFirst()){
                 gmailIsFound = true;
-                Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setContentText("You cannot use this email, user already exist");
-                alert.show();
-
-            } else {
-                gmailIsFound = false;
-                psInsert = connection.prepareStatement("INSERT INTO user_details VALUES(?, ?, ?, ?, NULL, NULL, NULL, NULL, ?, NULL)");
-
-                Date date = new Date();
-                SimpleDateFormat dateFormat = new SimpleDateFormat("Y-MM-dd");
-
-                psInsert.setInt(1, Integer.parseInt(user_account_id));
-                psInsert.setString(2, userFullName);
-                psInsert.setString(3, email);
-                psInsert.setString(4, user_password);
-                psInsert.setString(5, dateFormat.format(date));
-                psInsert.executeUpdate();
 
             }
             CreateAccountController.isFound = gmailIsFound;
@@ -68,14 +51,6 @@ public class DatabaseConnection {
             if (psCheckUserExist != null){
                 try {
                     psCheckUserExist.close();
-                } catch (SQLException e){
-                    e.printStackTrace();
-                    e.getCause();
-                }
-            }
-            if (psInsert != null){
-                try {
-                    psInsert.close();
                 } catch (SQLException e){
                     e.printStackTrace();
                     e.getCause();
@@ -102,7 +77,7 @@ public class DatabaseConnection {
         ResultSet resultSet = null;
         try {
             connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/banking_system_db", "root",
-                    "programming");
+                    dbPassword);
             psCheckUserExist = connection.prepareStatement("""
                     SELECT account_id, full_name, email_address, user_password
                     FROM user_details
@@ -188,7 +163,7 @@ public class DatabaseConnection {
 
         try {
             connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/banking_system_db", "root",
-                    "programming");
+                    dbPassword);
 
             psCheckEmailExist = connection.prepareStatement("""
                     SELECT email_address, user_password
@@ -256,5 +231,7 @@ public class DatabaseConnection {
         }
 
     }
+
+
 
 }

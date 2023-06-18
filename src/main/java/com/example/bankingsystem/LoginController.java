@@ -1,7 +1,7 @@
 package com.example.bankingsystem;
 
 
-import com.example.bankingsystem.DatabaseConnectionUtils.DatabaseConnection;
+import com.example.bankingsystem.DatabaseConnectionUtils.LoginDbConnection;
 import com.example.bankingsystem.OtherClasses.OtherCode;
 import com.example.bankingsystem.OtherClasses.WindowManagement;
 import com.jfoenix.controls.JFXDialog;
@@ -354,7 +354,7 @@ public class LoginController implements Initializable {
         changePasswordButton.setOnAction(event -> {
             if (OtherCode.validateEmail(fgEmail.getText()) &&
                     fgPassNew.getText().equals(fgPassNewRe.getText())){
-                DatabaseConnection.forgotPassword(fgEmail.getText(), fgPassNew.getText());
+                LoginDbConnection.forgotPassword(fgEmail.getText(), fgPassNew.getText());
                 if (isFoundDialog){
                     String title = "Forgot password";
                     String message = "Password changed successfully";

@@ -1,6 +1,6 @@
 package com.example.bankingsystem;
 
-import com.example.bankingsystem.DatabaseConnectionUtils.DatabaseConnection;
+import com.example.bankingsystem.DatabaseConnectionUtils.LoginDbConnection;
 import com.example.bankingsystem.OtherClasses.OtherCode;
 import io.github.palexdev.materialfx.controls.MFXButton;
 import io.github.palexdev.materialfx.controls.MFXPasswordField;
@@ -95,7 +95,7 @@ public class SignInIBankAccountTextController implements Initializable {
                 try {
                     FXMLLoader loader = new FXMLLoader(getClass().getResource("dashboard.fxml"));
                     root = loader.load();
-                    DatabaseConnection.signInUser(email_textField_signUp.getText(), acc_id_textField_signUp.getText(),
+                    LoginDbConnection.signInUser(email_textField_signUp.getText(), acc_id_textField_signUp.getText(),
                             password_textField_signUp.getText());
 
                     if (isEqualController && OtherCode.validateEmail(getEmailText.getText())){
@@ -139,7 +139,7 @@ public class SignInIBankAccountTextController implements Initializable {
                 }
 
 
-                //DatabaseConnection.signInUser(event, "dashboard1.fxml", email_textField_signUp.getText(),
+                //LoginDbConnection.signInUser(event, "dashboard1.fxml", email_textField_signUp.getText(),
                   //      acc_id_textField_signUp.getText(), password_textField_signUp.getText());
              }
         });

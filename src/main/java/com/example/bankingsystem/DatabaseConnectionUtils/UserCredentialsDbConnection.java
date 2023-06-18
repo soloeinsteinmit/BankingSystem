@@ -1,11 +1,11 @@
 package com.example.bankingsystem.DatabaseConnectionUtils;
 
 import com.example.bankingsystem.LoginClass;
+import com.example.bankingsystem.UserCredentialsController;
 import io.github.gleidson28.GNAvatarView;
 import io.github.palexdev.materialfx.controls.MFXTextField;
 import javafx.scene.control.Alert;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.input.DragEvent;
 import javafx.stage.FileChooser;
 
@@ -30,7 +30,8 @@ public class UserCredentialsDbConnection {
         connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/banking_system_db", "root",
                 "programming");
 
-        psInsert = connection.prepareStatement("UPDATE user_details SET user_profile_pic = ? WHERE account_id = 29050");
+        psInsert = connection.prepareStatement("UPDATE user_details SET user_profile_pic = ? WHERE account_id = "
+                + Integer.parseInt(account_id)+ "");
 
         List<File> files = event.getDragboard().getFiles();
 
@@ -49,18 +50,19 @@ public class UserCredentialsDbConnection {
 
     }
 
-    public static void getImageIntoDbFileChooser(ImageView imageView, GNAvatarView avatarView)
-            throws SQLException, IOException {
+    public static void getImageIntoDbFileChooser(GNAvatarView avatarView)
+            throws SQLException {
         Connection connection;
         PreparedStatement psInsert;
 
         connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/banking_system_db", "root",
                 "programming");
 
-        psInsert = connection.prepareStatement("UPDATE testing_image_table SET image = ? WHERE id = 29050");
+        psInsert = connection.prepareStatement("UPDATE user_details SET user_profile_pic = ? WHERE account_id = "
+                + Integer.parseInt(account_id));
 
         PreparedStatement finalPsInsert = psInsert;
-        imageView.setOnMouseClicked(event -> {
+//        imageView.setOnMouseClicked(event -> {
             FileChooser fileChooser = new FileChooser();
             File file = fileChooser.showOpenDialog(LoginClass.my_stage);
             fileMain = file;
@@ -68,7 +70,6 @@ public class UserCredentialsDbConnection {
             System.out.println("fileChooser =  " + file);
             try {
                 FileInputStream fileInputStream = new FileInputStream(file);
-
 
                 FileInputStream fileInputStream1 = new FileInputStream(file);
                 Image image = new Image(fileInputStream1);
@@ -83,7 +84,7 @@ public class UserCredentialsDbConnection {
             } catch (IOException | SQLException e) {
                 throw new RuntimeException(e);
             }
-        });
+//        });
 
 
     }
@@ -96,7 +97,7 @@ public class UserCredentialsDbConnection {
         ResultSet resultSet;
 
         connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/banking_system_db", "root",
-                "programming");
+                LoginDbConnection.dbPassword);
         psCheckAccIdExist = connection.prepareStatement("""
                 SELECT account_id
                 FROM user_details
@@ -127,7 +128,7 @@ public class UserCredentialsDbConnection {
         PreparedStatement psInsert;
 
         connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/banking_system_db", "root",
-                "programming");
+                LoginDbConnection.dbPassword);
         psInsert = connection.prepareStatement("INSERT INTO user_details VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
 
         java.util.Date date = new Date();
@@ -156,7 +157,7 @@ public class UserCredentialsDbConnection {
         ResultSet resultSet;
 
         connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/banking_system_db", "root",
-                "programming");
+                LoginDbConnection.dbPassword);
 
         psInsert = connection.prepareStatement("SELECT email_address FROM user_details WHERE account_id = ?");
         psInsert.setInt(1, Integer.parseInt(getAccId.getText()));
@@ -182,7 +183,7 @@ public class UserCredentialsDbConnection {
         ResultSet resultSet;
 
         connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/banking_system_db", "root",
-                "programming");
+                LoginDbConnection.dbPassword);
 
         psInsert = connection.prepareStatement("SELECT full_name FROM user_details WHERE account_id = ?");
         psInsert.setInt(1, Integer.parseInt(getAccId.getText()));
@@ -210,7 +211,7 @@ public class UserCredentialsDbConnection {
         ResultSet resultSet;
 
         connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/banking_system_db", "root",
-                "programming");
+                LoginDbConnection.dbPassword);
 
         psInsert = connection.prepareStatement("SELECT visa_account_num FROM user_details WHERE account_id = ?");
         psInsert.setInt(1, Integer.parseInt(getAccId.getText()));
@@ -226,6 +227,47 @@ public class UserCredentialsDbConnection {
                 visaNum.setText(visaAccountNum);
                 System.out.println("result set" +  visaAccountNum);
             }
+        }
+
+    }
+
+    public static void checkEmailExist(MFXTextField email) throws SQLException {
+        Connection connection;
+        PreparedStatement psCheckUserExist;
+        ResultSet resultSet;
+
+        connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/banking_system_db", "root",
+                LoginDbConnection.dbPassword);
+        psCheckUserExist = connection.prepareStatement("SELECT email_address FROM banking_system_db.user_details" +
+                " WHERE account_id = " + Integer.parseInt(account_id));
+        resultSet = psCheckUserExist.executeQuery();
+
+        if (!resultSet.isBeforeFirst()){
+            UserCredentialsController.exist = false;
+
+        }else {
+            UserCredentialsController.exist = true;
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setContentText("EMAIL ADDRESS NOT IN DATABASE");
+            alert.show();
+        }
+    }
+
+    public static void getUserCredentialsToHome() throws SQLException {
+        Connection connection;
+        PreparedStatement psCheckUserExist;
+        ResultSet resultSet;
+
+        connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/banking_system_db", "root",
+                LoginDbConnection.dbPassword);
+        psCheckUserExist = connection.prepareStatement("SELECT full_name, email_address, visa_account_num, " +
+                "user_profile_pic, free_transfer FROM banking_system_db.user_details WHERE account_id = " + Integer.parseInt(account_id));
+        resultSet = psCheckUserExist.executeQuery();
+
+        while (resultSet.next()){
+            Blob blob = resultSet.getBlob("user_profile_pic");
+            UserCredentialsController.iStream = blob.getBinaryStream();
+
         }
 
     }

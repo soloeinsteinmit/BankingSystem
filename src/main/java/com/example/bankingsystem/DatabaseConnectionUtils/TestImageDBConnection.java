@@ -24,7 +24,7 @@ public class TestImageDBConnection {
         PreparedStatement psInsert;
 
         connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/banking_system_db", "root",
-                "programming");
+                LoginDbConnection.dbPassword);
 
         psInsert = connection.prepareStatement("UPDATE testing_image_table SET image = ? WHERE id = 333");
 
@@ -49,7 +49,7 @@ public class TestImageDBConnection {
         PreparedStatement psInsert;
 
         connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/banking_system_db", "root",
-                "programming");
+                LoginDbConnection.dbPassword);
 
             psInsert = connection.prepareStatement("UPDATE testing_image_table SET image = ? WHERE id = 333");
 
@@ -85,7 +85,7 @@ public class TestImageDBConnection {
         PreparedStatement psInsert;
 
         connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/banking_system_db", "root",
-                "programming");
+                LoginDbConnection.dbPassword);
 
         psInsert = connection.prepareStatement("UPDATE testing_image_table SET full_name = ? WHERE id = 333");
         if (name.equals("")){
@@ -107,7 +107,7 @@ public class TestImageDBConnection {
         ResultSet resultSet;
 
         connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/banking_system_db", "root",
-                "programming");
+                LoginDbConnection.dbPassword);
         psCheckUserExist = connection.prepareStatement("""
                 SELECT image, full_name
                 FROM testing_image_table

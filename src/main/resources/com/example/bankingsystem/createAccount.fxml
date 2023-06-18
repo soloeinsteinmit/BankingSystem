@@ -1,12 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import io.github.palexdev.materialfx.controls.*?>
-<?import javafx.geometry.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.paint.*?>
-<?import javafx.scene.text.*?>
+<?import io.github.palexdev.materialfx.controls.MFXButton?>
+<?import io.github.palexdev.materialfx.controls.MFXPasswordField?>
+<?import io.github.palexdev.materialfx.controls.MFXTextField?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
 <Pane fx:id="translateSignInPane" prefHeight="462.0" prefWidth="433.0" style="-fx-background-color: #0E172A;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.bankingsystem.CreateAccountController">
    <children>
@@ -71,7 +75,7 @@
             <Color red="1.0" green="1.0" blue="1.0" />
          </textFill>
       </MFXTextField>
-      <ImageView fx:id="email_img_signUp" fitHeight="18.0" fitWidth="26.0" layoutX="68.0" layoutY="177.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="18.0" fitWidth="26.0" layoutX="68.0" layoutY="177.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@name.png" />
          </image>
@@ -87,7 +91,7 @@
             <Color red="1.0" green="1.0" blue="1.0" />
          </textFill>
       </MFXTextField>
-      <ImageView fx:id="email_img_signUp1" fitHeight="18.0" fitWidth="26.0" layoutX="67.0" layoutY="234.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="18.0" fitWidth="26.0" layoutX="67.0" layoutY="234.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@email.png" />
          </image>
@@ -106,7 +110,7 @@
             <Insets />
          </opaqueInsets>
       </MFXPasswordField>
-      <ImageView fx:id="password_img_signUp" fitHeight="20.0" fitWidth="18.0" layoutX="68.0" layoutY="294.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="20.0" fitWidth="18.0" layoutX="68.0" layoutY="294.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@password.png" />
          </image>
@@ -122,10 +126,8 @@
             <Color red="1.0" green="1.0" blue="1.0" />
          </textFill>
       </MFXTextField>
-      <ImageView fx:id="email_img_signUp11" fitHeight="18.0" fitWidth="26.0" layoutX="68.0" layoutY="347.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@id.png" />
-         </image>
+      <ImageView fitHeight="18.0" fitWidth="26.0" layoutX="68.0" layoutY="347.0" pickOnBounds="true" preserveRatio="true">
+         <Image url="@id.png" />
       </ImageView>
    </children>
 </Pane>

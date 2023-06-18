@@ -1,5 +1,6 @@
 package com.example.bankingsystem;
 
+import com.example.bankingsystem.DatabaseConnectionUtils.LoginDbConnection;
 import com.example.bankingsystem.DatabaseConnectionUtils.UserCredentialsDbConnection;
 import com.example.bankingsystem.OtherClasses.OtherCode;
 import io.github.palexdev.materialfx.controls.MFXButton;
@@ -84,6 +85,7 @@ public class CreateAccountController implements Initializable {
     * */
     private void signUp_user(){
         signUpBtn.setOnAction(event ->{
+            LoginDbConnection.signUpUser(email_textField_signIn.getText());
 
             if (account_id_textField_signIn.getText().equals("") || email_textField_signIn.getText().equals("")
                     || name_textField_signIn.getText().equals("")
@@ -92,24 +94,28 @@ public class CreateAccountController implements Initializable {
                 alert.setContentText("Please fill in all the forms");
                 alert.show();
             }
+            else if(isFound){
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setContentText("You cannot use this email, user already exist");
+                alert.show();
+            }
             else{
 
                 try {
                     FXMLLoader loader = new FXMLLoader(getClass().getResource("user_credentials.fxml"));
                     root = loader.load();
 
-                    /*DatabaseConnection.signUpUser(name_textField_signIn.getText(),
-                            email_textField_signIn.getText(), password_textField_signIn.getText(),
-                            account_id_textField_signIn.getText());*/
+
 
                     System.out.println("IS FOUND UP "+ isFound);
 
-                    if (OtherCode.validateEmail(email_textField_signIn.getText()) && !isFound){
+                    if (OtherCode.validateEmail(email_textField_signIn.getText())){
+
+                        UserCredentialsDbConnection.account_id = account_id_textField_signIn.getText();
 
                         UserCredentialsController getText = loader.getController();
                         getText.setTextField(email_textField_signIn, name_textField_signIn, account_id_textField_signIn);
 
-                        UserCredentialsDbConnection.account_id = account_id_textField_signIn.getText();
                         System.out.println("acc id createAcc = " + UserCredentialsDbConnection.account_id);
                         UserCredentialsDbConnection.password = password_textField_signIn.getText();
                         System.out.println("password = " + UserCredentialsDbConnection.password);

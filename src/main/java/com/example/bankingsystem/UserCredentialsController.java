@@ -13,7 +13,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
-import javafx.scene.control.ToggleGroup;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.DragEvent;
 import javafx.scene.input.TransferMode;
@@ -21,6 +20,7 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.URL;
 import java.sql.SQLException;
 import java.time.LocalDate;
@@ -44,9 +44,6 @@ public class UserCredentialsController implements Initializable {
 
     @FXML
     private MFXTextField contact_fullName;
-
-    @FXML
-    private ToggleGroup contact_gender;
 
     @FXML
     private MFXRadioButton contact_radioBtn_female;
@@ -97,9 +94,6 @@ public class UserCredentialsController implements Initializable {
     private MFXTextField user_full_name;
     @FXML
     private MFXTextField freeTransfer;
-
-    @FXML
-    private ToggleGroup user_gender;
 
     @FXML
     private Label user_name;
@@ -153,7 +147,9 @@ public class UserCredentialsController implements Initializable {
     public static Label get_name_db;
     public static Label get_email_db;
     public static Label get_visa_num_db;
+    public static boolean exist;
     private static Parent root;
+    public static InputStream iStream;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -184,11 +180,11 @@ public class UserCredentialsController implements Initializable {
         get_email_db = getEmailDb;         get_name_db = getNameDb;      get_visa_num_db = getVisaNumDb;
         getAndSetEmail();                  getAndSetName();              getAndSetVisaNum();
 
-        try {
+/*        try {
             UserCredentialsDbConnection.getImageIntoDbFileChooser(user_addImg, user_prof);
         } catch (SQLException | IOException e) {
             throw new RuntimeException(e);
-        }
+        }*/
 
         // add contact
         addContact();
@@ -231,6 +227,11 @@ public class UserCredentialsController implements Initializable {
         }
     }
 
+    @FXML
+    void getFileChooser() throws SQLException {
+        UserCredentialsDbConnection.getImageIntoDbFileChooser(user_prof);
+    }
+
     public void setTextField(MFXTextField email, MFXTextField name, MFXTextField accId){
         uEmail.setText(email.getText());
         uName.setText(name.getText());
@@ -249,6 +250,34 @@ public class UserCredentialsController implements Initializable {
                     gender = userFemale.getText();
                 }
                 UserCredentialsDbConnection.userDetails(uName, uEmail, uVisaNum, date, gender, fTransfer.getText());
+                //UserCredentialsDbConnection.checkEmailExist(uEmail);
+                UserCredentialsDbConnection.getUserCredentialsToHome();
+                FXMLLoader loader = new FXMLLoader(UserCredentialsController.class.getResource("dashboard.fxml"));
+                root = loader.load();
+
+                HomeController userCredential = loader.getController();
+
+
+//                HomeController.userName.setText(uName.getText());
+//                HomeController.visaNumLabel.setText(uVisaNum.getText());
+//                HomeController.free_transfer.setText(fTransfer.getText());
+
+                String[] splitName = userName.getText().split(" ");
+                String[] firstName = splitName[0].split("");
+                // gotten abbr name
+//                HomeController.abbrName.setText(firstName[0] + " " + splitName[splitName.length-1]);
+//                System.out.println("register btn " + HomeController.str_abbrName);
+//
+//                Image image = new Image(iStream);
+//                HomeController.uProfilePic.setImage(image);
+
+                userCredential.setUserCredentials2(uName.getText(), firstName[0] + " " + splitName[splitName.length-1],
+                        iStream, fTransfer.getText());
+
+                Stage stage = (Stage) ((Node)actionEvent.getSource()).getScene().getWindow();
+                stage.setScene(new Scene(root));
+                stage.show();
+
             } catch (SQLException | IOException e) {
                 throw new RuntimeException(e);
             }
